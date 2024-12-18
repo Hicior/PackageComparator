@@ -4,9 +4,9 @@ const packagesData = {
     "Nielimitowane konsultacje podatkowe",
     "Dostęp do platformy umożliwiającej przekazywanie dokumentów",
     "Dostęp do danych raportowych takich jak podatki, wynagrodzenia, ewidencja VAT",
-    "Wsparcie w kontrolach podatkowych",
     "Powiadomienia SMS o zbliżających się terminach płatności podatków itp.",
     "Dostęp do wzorów umów",
+    "Wsparcie w kontrolach podatkowych",
     "Newsletter podatkowy",
     "Dostęp do webinarów",
     "Preferencyjna cena za pozostałe usługi Usługodawcy",
@@ -14,49 +14,48 @@ const packagesData = {
 
   "Mentzen+ IT podstawowy": [
     "Prowadzenie księgowości",
-    "Nielimitowane konsultacje podatkowe",
     "Dostęp do platformy umożliwiającej przekazywanie dokumentów",
     "Dostęp do danych raportowych takich jak podatki, wynagrodzenia, ewidencja VAT",
-    "Wsparcie w kontrolach podatkowych",
-    "Wsparcie w postępowaniach przed organami podatkowymi oraz sądami administracyjnymi, w tym przed Naczelnym Sądem Administracyjnym",
     "Powiadomienia SMS o zbliżających się terminach płatności podatków itp.",
+    "Nielimitowane konsultacje podatkowe",
     "Uproszczony audyt KPIR",
     "Wnioski do GUS",
     "Zakładanie JDG",
     "Zakładanie spółek przez system S24",
     "Start z Mentzenem",
-    "Wsparcie w procesie IP BOX",
-    "Wniosek o wydanie interpretacji indywidualnej w zakresie ulgi IP BOX oraz zastosowanie stawek 12% oraz 8,5% ryczałtu",
-    "Przygotowywanie bieżącej ewidencji na potrzeby rozliczenia ulgi IP Box",
-    "Analiza podatkowa raz w roku kalendarzowym",
     "Dostęp do wzorów umów",
     "Newsletter podatkowy",
     "Dostęp do szkoleń",
     "Dostęp do webinarów",
     "Dostęp do alertu podatkowego",
+    "Wsparcie w procesie IP BOX",
+    "Wniosek o wydanie interpretacji indywidualnej w zakresie ulgi IP BOX oraz zastosowanie stawek 12% oraz 8,5% ryczałtu",
     "Opracowania do materiałów publikowanych na YouTube",
     "Preferencyjna cena za pozostałe usługi Usługodawcy",
+    "Wsparcie w kontrolach podatkowych",
+    "Wsparcie w postępowaniach przed organami podatkowymi oraz sądami administracyjnymi, w tym przed Naczelnym Sądem Administracyjnym",
+    "Przygotowywanie bieżącej ewidencji na potrzeby rozliczenia ulgi IP Box",
+    "Analiza podatkowa raz w roku kalendarzowym",
   ],
 
   "Mentzen+ IT ryczałt": [
     "Nielimitowane konsultacje podatkowe",
-    "Prowadzenie księgowości",
-    "Dostęp do platformy umożliwiającej przekazywanie dokumentów",
-    "Dostęp do danych raportowych takich jak podatki, wynagrodzenia, ewidencja VAT",
-    "Wsparcie w procesie IP BOX",
-    "Wniosek o wydanie interpretacji indywidualnej w zakresie ulgi IP BOX oraz zastosowanie stawek 12% oraz 8,5% ryczałtu",
     "Uproszczony audyt KPIR",
     "Wnioski do GUS",
     "Zakładanie JDG",
     "Zakładanie spółek przez system S24",
     "Start z Mentzenem",
-    "Wsparcie w kontrolach podatkowych",
-    "Powiadomienia SMS o zbliżających się terminach płatności podatków itp.",
     "Dostęp do wzorów umów",
     "Newsletter podatkowy",
     "Dostęp do szkoleń",
     "Dostęp do webinarów",
     "Dostęp do alertu podatkowego",
+    "Wsparcie w procesie IP BOX",
+    "Wniosek o wydanie interpretacji indywidualnej w zakresie ulgi IP BOX oraz zastosowanie stawek 12% oraz 8,5% ryczałtu",
+    "Prowadzenie księgowości",
+    "Dostęp do platformy umożliwiającej przekazywanie dokumentów",
+    "Dostęp do danych raportowych takich jak podatki, wynagrodzenia, ewidencja VAT",
+    "Powiadomienia SMS o zbliżających się terminach płatności podatków itp.",
     "Opracowania do materiałów publikowanych na YouTube",
     "Preferencyjna cena za pozostałe usługi Usługodawcy",
     "Analiza podatkowa raz w roku",
@@ -65,55 +64,48 @@ const packagesData = {
   "Mentzen+ IT średni": [
     "Nielimitowane konsultacje podatkowe",
     "Nielimitowane konsultacje prawne",
-    "Prowadzenie księgowości",
-    "Dostęp do platformy umożliwiającej przekazywanie dokumentów",
-    "Dostęp do danych raportowych takich jak podatki, wynagrodzenia, ewidencja VAT",
-    "Wsparcie w kontrolach podatkowych",
-    "Wsparcie w postępowaniach przed organami podatkowymi oraz sądami administracyjnymi, w tym przed Naczelnym Sądem Administracyjnym",
-    "Wsparcie w procesie IP BOX",
-    "Wniosek o wydanie interpretacji indywidualnej w zakresie ulgi IP BOX oraz zastosowanie stawek 12% oraz 8,5% ryczałtu",
     "Uproszczony audyt KPIR",
     "Wnioski do GUS",
     "Zakładanie JDG",
     "Zakładanie spółek przez system S24",
     "Start z Mentzenem",
-    "Przygotowywanie bieżącej ewidencji na potrzeby rozliczenia ulgi IP Box",
-    "Opracowania do materiałów publikowanych na YouTube",
-    "Analiza podatkowa raz w roku kalendarzowym",
     "Dostęp do wzorów umów",
     "Newsletter podatkowy",
     "Dostęp do szkoleń",
     "Dostęp do webinarów",
     "Dostęp do alertu podatkowego",
+    "Wsparcie w procesie IP BOX",
+    "Wniosek o wydanie interpretacji indywidualnej w zakresie ulgi IP BOX oraz zastosowanie stawek 12% oraz 8,5% ryczałtu",
+    "Opracowania do materiałów publikowanych na YouTube",
     "Preferencyjna cena za pozostałe usługi Usługodawcy",
+    "Wsparcie w kontrolach podatkowych",
+    "Wsparcie w postępowaniach przed organami podatkowymi oraz sądami administracyjnymi, w tym przed Naczelnym Sądem Administracyjnym",
+    "Przygotowywanie bieżącej ewidencji na potrzeby rozliczenia ulgi IP Box",
   ],
 
   "Mentzen+ IT premium": [
     "Nielimitowane konsultacje podatkowe",
     "Nielimitowane konsultacje prawne",
-    "Prowadzenie księgowości",
-    "Dostęp do platformy umożliwiającej przekazywanie dokumentów",
-    "Dostęp do danych raportowych takich jak podatki, wynagrodzenia, ewidencja VAT",
-    "Wsparcie w kontrolach podatkowych",
-    "Wsparcie w postępowaniach przed organami podatkowymi oraz sądami administracyjnymi, w tym przed Naczelnym Sądem Administracyjnym",
-    "Wsparcie w procesie IP BOX",
-    "Wniosek o wydanie interpretacji indywidualnej w zakresie ulgi IP BOX oraz zastosowanie stawek 12% oraz 8,5% ryczałtu",
     "Uproszczony audyt KPIR",
     "Wnioski do GUS",
     "Zakładanie JDG",
     "Zakładanie spółek przez system S24",
     "Start z Mentzenem",
-    "Przygotowywanie bieżącej ewidencji na potrzeby rozliczenia ulgi IP Box",
-    "Dostęp do wzorów regulaminów i OWU opracowanych przez Kancelarię",
-    "Dostęp do wzorów uchwał i innych dokumentów korporacyjnych opracowanych przez Kancelarię",
     "Dostęp do wzorów umów handlowych",
     "Dostęp do wzorów umów",
-    "Opracowania do materiałów publikowanych na YouTube",
-    "Dostęp do alertu podatkowego",
+    "Newsletter podatkowy",
     "Dostęp do szkoleń",
     "Dostęp do webinarów",
-    "Newsletter podatkowy",
+    "Dostęp do alertu podatkowego",
+    "Dostęp do wzorów regulaminów i OWU opracowanych przez Kancelarię",
+    "Dostęp do wzorów uchwał i innych dokumentów korporacyjnych opracowanych przez Kancelarię",
+    "Wsparcie w procesie IP BOX",
+    "Wniosek o wydanie interpretacji indywidualnej w zakresie ulgi IP BOX oraz zastosowanie stawek 12% oraz 8,5% ryczałtu",
+    "Opracowania do materiałów publikowanych na YouTube",
     "Preferencyjna cena za pozostałe usługi Usługodawcy",
+    "Przygotowywanie bieżącej ewidencji na potrzeby rozliczenia ulgi IP Box",
+    "Wsparcie w kontrolach podatkowych",
+    "Wsparcie w postępowaniach przed organami podatkowymi oraz sądami administracyjnymi, w tym przed Naczelnym Sądem Administracyjnym",
   ],
 
   "Mentzen+ Prawo i Podatki": [
@@ -121,12 +113,9 @@ const packagesData = {
     "Nielimitowane konsultacje prawne",
     "Analiza podatkowa",
     "Tematyczne, comiesięczne audyty prawne",
+    "Przygotowanie wezwania do zapłaty raz w miesiącu",
     "Uproszczony audyt ksiąg rachunkowych",
     "Uproszczony audyt KPIR",
-    "Uproszczony audyt podatkowy",
-    "Wsparcie w procesie IP BOX",
-    "Wniosek o wydanie interpretacji indywidualnej w zakresie ulgi IP BOX oraz zastosowanie stawek 12% oraz 8,5% ryczałtu",
-    "Przygotowanie wezwania do zapłaty raz w miesiącu",
     "Zakładanie JDG",
     "Zakładanie spółek przez system S24",
     "Wprowadzanie zmian do umów w systemie S24",
@@ -160,16 +149,11 @@ const packagesData = {
   "Mentzen+ Podatki": [
     "Nielimitowane konsultacje podatkowe",
     "Analiza podatkowa",
-    "Uproszczony audyt podatkowy",
     "Uproszczony audyt ksiąg rachunkowych",
     "Uproszczony audyt KPIR",
-    "Wsparcie w procesie IP BOX",
-    "Wniosek o wydanie interpretacji indywidualnej w zakresie ulgi IP BOX oraz zastosowanie stawek 12% oraz 8,5% ryczałtu",
-    "Prowadzenie księgowości",
-    "Dostęp do platformy umożliwiającej przekazywanie dokumentów",
-    "Dostęp do danych raportowych takich jak podatki, wynagrodzenia, ewidencja VAT",
-    "Preferencyjna cena za pozostałe usługi Usługodawcy",
+    "Uproszczony audyt podatkowy",
     "Zakładanie JDG",
+    "Preferencyjna cena za pozostałe usługi Usługodawcy",
     "Dostęp do bazy wiedzy",
     "Dostęp do szkoleń",
     "Newsletter podatkowy",
@@ -202,9 +186,24 @@ packageNames.forEach((name) => {
 packageSelect1.value = packageNames[0];
 packageSelect2.value = packageNames[1];
 
-function createStatusIcon(status) {
+function createStatusIcon(status, feature, packageName) {
   const icon = document.createElement("div");
   icon.className = "status-icon";
+
+  // Special case for "Prowadzenie księgowości"
+  if (
+    feature === "Prowadzenie księgowości" &&
+    (packageName === "Mentzen+ IT podstawowy" ||
+      packageName === "Mentzen+ IT ryczałt")
+  ) {
+    icon.innerHTML = `<svg width="15" height="15" viewBox="0 0 14 14" fill="none">
+      <text x="7" y="11" text-anchor="middle" fill="#0F766E" style="font-size: 14px; font-weight: 700;">?</text>
+    </svg>`;
+    icon.setAttribute("data-tooltip", "do 10 lub 30 dok. miesięcznie");
+    icon.style.cursor = "help";
+    return icon;
+  }
+
   icon.setAttribute("role", "img");
   icon.setAttribute(
     "aria-label",
@@ -267,7 +266,7 @@ function renderComparison() {
         hasP1 === "Yes" ? "status-yes" : "status-no"
       }`;
       statusCell1.setAttribute("data-label", p1);
-      statusCell1.appendChild(createStatusIcon(hasP1));
+      statusCell1.appendChild(createStatusIcon(hasP1, feature, p1));
       statusWrapper1.appendChild(statusCell1);
 
       const statusCell2 = document.createElement("div");
@@ -275,7 +274,7 @@ function renderComparison() {
         hasP2 === "Yes" ? "status-yes" : "status-no"
       }`;
       statusCell2.setAttribute("data-label", p2);
-      statusCell2.appendChild(createStatusIcon(hasP2));
+      statusCell2.appendChild(createStatusIcon(hasP2, feature, p2));
       statusWrapper2.appendChild(statusCell2);
     }
   });

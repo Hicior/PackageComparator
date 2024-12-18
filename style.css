@@ -175,6 +175,61 @@ main {
   justify-content: center;
 }
 
+.status-icon[data-tooltip] {
+  position: relative;
+}
+
+.status-icon[data-tooltip]:before,
+.status-icon[data-tooltip]:after {
+  position: absolute;
+  visibility: hidden;
+  opacity: 0;
+  transition: transform 200ms ease, opacity 200ms;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  z-index: 99;
+}
+
+.status-icon[data-tooltip]:before {
+  content: attr(data-tooltip);
+  background: var(--app-dark-blue);
+  color: var(--app-white);
+  font-size: 12px;
+  font-weight: bold;
+  padding: 8px 12px;
+  border-radius: 4px;
+  white-space: nowrap;
+  text-decoration: none;
+  letter-spacing: 0.5px;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  margin-bottom: 10px;
+}
+
+.status-icon[data-tooltip]:after {
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+  content: "";
+  border-top-color: var(--app-dark-blue);
+  border-bottom: none;
+  bottom: 101%;
+  left: calc(50% - 6px);
+  transform: translateY(10px);
+  margin-bottom: 4px;
+}
+
+.status-icon[data-tooltip]:hover:after,
+.status-icon[data-tooltip]:hover:before {
+  visibility: visible;
+  opacity: 0.95;
+  transform: translateX(-50%) translateY(0);
+}
+
+.status-icon[data-tooltip]:hover:after {
+  transform: translateY(0);
+}
+
 .status-yes .status-icon {
   background-color: rgba(15, 118, 110, 0.1);
 }
