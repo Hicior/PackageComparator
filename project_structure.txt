@@ -1,6 +1,103 @@
-/* ==========================================================================
-   Package Data Configuration
-   ========================================================================== */
+PROJECT STRUCTURE:
+================================================================================
+
+├── index.html
+├── script.js
+└── style.css
+
+
+FILE CONTENTS:
+================================================================================
+
+================================================================================
+File: c:\Users\Nagrywanie\OneDrive - Sławomir Mentzen\Pulpit\PackageComparator\index.html
+================================================================================
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Package Comparison</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+  <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 150" id="line">
+      <line x1="75" y1="34" x2="75" y2="58"/>
+    </symbol>
+    <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 150" id="circle">
+      <circle cx="75" cy="80" r="35"/>
+    </symbol>
+  </svg>
+  <!-- Header -->  
+  <header class="header">
+    <h1>Porównaj ze sobą dowolne pakiety</h1>
+  </header>
+  <!-- Comparison header --> 
+  <div id="comparison-header" class="comparison-header">
+    <div class="flex-container">
+      <div class="feature-header">Korzyści</div>
+      <div class="toggle-container">
+        <div class="power-switch">
+          <input type="checkbox" id="diffToggle" aria-label="Pokaż tylko różnice" />
+          <div class="button">
+            <svg class="power-off">
+              <use xlink:href="#line" class="line" />
+              <use xlink:href="#circle" class="circle" />
+            </svg>
+            <svg class="power-on">
+              <use xlink:href="#line" class="line" />
+              <use xlink:href="#circle" class="circle" />
+            </svg>
+          </div>
+        </div>
+        <span>Pokaż tylko różnice</span>
+      </div>
+      
+    </div>
+    <div class="package-column">
+      <select id="package1" class="header-select"></select>
+    </div>
+    <div class="package-column">
+      <select id="package2" class="header-select"></select>
+    </div>
+  </div>
+  <!-- Comparison app -->
+  <div class="comparison-app">
+    <main>
+      <div class="comparison-container">
+        <div id="comparisonBody" class="comparison-body">
+          <div class="content-wrapper">
+            <div class="feature-wrapper">
+              <div class="feature-cell">...</div>
+            </div>
+            <div class="status-wrapper">
+              <div class="status-cell">
+                <div class="status-icon">...</div>
+              </div>
+            </div>
+            <div class="status-wrapper">
+              <div class="status-cell">
+                <div class="status-icon">...</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+
+</body>
+</html>
+
+
+================================================================================
+File: c:\Users\Nagrywanie\OneDrive - Sławomir Mentzen\Pulpit\PackageComparator\script.js
+================================================================================
 const packagesData = {
   PRIME: [
     "Prowadzenie księgowości",
@@ -14,6 +111,7 @@ const packagesData = {
     "Dostęp do webinarów",
     "Preferencyjna cena za pozostałe usługi Usługodawcy",
   ],
+
   "Mentzen+ IT Podstawowy": [
     "Nielimitowane konsultacje podatkowe",
     "Analiza podatkowa raz w roku kalendarzowym",
@@ -39,6 +137,7 @@ const packagesData = {
     "Opracowania do materiałów publikowanych na YouTube",
     "Preferencyjna cena za pozostałe usługi Usługodawcy",
   ],
+
   "Mentzen+ IT Ryczałt": [
     "Nielimitowane konsultacje podatkowe",
     "Analiza podatkowa raz w roku",
@@ -61,6 +160,7 @@ const packagesData = {
     "Opracowania do materiałów publikowanych na YouTube",
     "Preferencyjna cena za pozostałe usługi Usługodawcy",
   ],
+
   "Mentzen+ IT Średni": [
     "Nielimitowane konsultacje podatkowe",
     "Analiza podatkowa raz w roku",
@@ -82,6 +182,7 @@ const packagesData = {
     "Opracowania do materiałów publikowanych na YouTube",
     "Preferencyjna cena za pozostałe usługi Usługodawcy",
   ],
+
   "Mentzen+ IT Premium": [
     "Nielimitowane konsultacje podatkowe",
     "Analiza podatkowa raz w roku",
@@ -107,6 +208,7 @@ const packagesData = {
     "Preferencyjna cena za pozostałe usługi Usługodawcy",
     "Dostęp do wzorów uchwał i innych dokumentów korporacyjnych opracowanych przez Kancelarię",
   ],
+
   "Mentzen+ Prawo i Podatki": [
     "Nielimitowane konsultacje podatkowe",
     "Nielimitowane konsultacje prawne",
@@ -129,6 +231,7 @@ const packagesData = {
     "Po roku nieprzerwanej współpracy możliwość skorzystania z bezpłatnych usług prawnych",
     "Opracowania do materiałów publikowanych na YouTube",
   ],
+
   "Mentzen+ Prawo": [
     "Nielimitowane konsultacje prawne",
     "Przygotowanie raz w miesiącu wezwania do zapłaty",
@@ -143,6 +246,7 @@ const packagesData = {
     "Po roku nieprzerwanej współpracy możliwość skorzystania z bezpłatnych usług prawnych",
     "Preferencyjna cena za pozostałe usługi Usługodawcy",
   ],
+
   "Mentzen+ Podatki": [
     "Nielimitowane konsultacje podatkowe",
     "Analiza podatkowa",
@@ -156,26 +260,16 @@ const packagesData = {
   ],
 };
 
-/* ==========================================================================
-   Feature Management
-   ========================================================================== */
-// Create a unique set of all features across packages
 const allFeaturesSet = new Set();
-Object.values(packagesData).forEach((pkg) => {
-  pkg.forEach((f) => allFeaturesSet.add(f));
-});
+Object.values(packagesData).forEach((pkg) =>
+  pkg.forEach((f) => allFeaturesSet.add(f))
+);
 const allFeatures = Array.from(allFeaturesSet);
 
-/* ==========================================================================
-   DOM Elements
-   ========================================================================== */
 const packageSelect1 = document.getElementById("package1");
 const packageSelect2 = document.getElementById("package2");
 const comparisonBody = document.getElementById("comparisonBody");
 
-/* ==========================================================================
-   Package Select Initialization
-   ========================================================================== */
 const packageNames = Object.keys(packagesData);
 packageNames.forEach((name) => {
   const opt1 = document.createElement("option");
@@ -189,18 +283,14 @@ packageNames.forEach((name) => {
   packageSelect2.appendChild(opt2);
 });
 
-// Set default selected packages
 packageSelect1.value = packageNames[0];
 packageSelect2.value = packageNames[1];
 
-/* ==========================================================================
-   Status Icon Creation
-   ========================================================================== */
 function createStatusIcon(status, feature, packageName) {
   const icon = document.createElement("div");
   icon.className = "status-icon";
 
-  // Package-specific tooltip configurations
+  // Features with package-specific tooltips
   const packageSpecificTooltips = {
     "Po roku nieprzerwanej współpracy możliwość skorzystania z bezpłatnych usług prawnych":
       {
@@ -209,7 +299,7 @@ function createStatusIcon(status, feature, packageName) {
       },
   };
 
-  // Feature-specific tooltip configurations
+  // Standard features with tooltips
   const featuresWithTooltips = {
     "Prowadzenie księgowości": "do 10 lub 30 dok. miesięcznie",
     "Dostęp do platformy umożliwiającej przekazywanie dokumentów":
@@ -222,7 +312,7 @@ function createStatusIcon(status, feature, packageName) {
       "dla osób, które korzystały z naszego wsparcia w zakresie uzyskania i rozliczenia ulgi",
   };
 
-  // Package categories for conditional tooltips
+  // Package groups for different tooltip conditions
   const accountingPackages = ["Mentzen+ IT Podstawowy", "Mentzen+ IT Ryczałt"];
   const itPackages = [
     "Mentzen+ IT Podstawowy",
@@ -230,7 +320,7 @@ function createStatusIcon(status, feature, packageName) {
     "Mentzen+ IT Premium",
   ];
 
-  // Handle package-specific tooltips
+  // Check for package-specific tooltips first
   if (
     feature in packageSpecificTooltips &&
     packageName in packageSpecificTooltips[feature]
@@ -238,6 +328,7 @@ function createStatusIcon(status, feature, packageName) {
     icon.innerHTML = `<svg width="15" height="15" viewBox="0 0 14 14" fill="none">
       <text x="7" y="11" text-anchor="middle" fill="#0F766E" style="font-size: 14px; font-weight: 700;">?</text>
     </svg>`;
+
     icon.setAttribute(
       "data-tooltip",
       packageSpecificTooltips[feature][packageName]
@@ -246,7 +337,7 @@ function createStatusIcon(status, feature, packageName) {
     return icon;
   }
 
-  // Handle feature-specific tooltips
+  // Check for standard tooltips
   if (feature in featuresWithTooltips) {
     const shouldShowTooltip =
       feature ===
@@ -258,13 +349,14 @@ function createStatusIcon(status, feature, packageName) {
       icon.innerHTML = `<svg width="15" height="15" viewBox="0 0 14 14" fill="none">
         <text x="7" y="11" text-anchor="middle" fill="#0F766E" style="font-size: 14px; font-weight: 700;">?</text>
       </svg>`;
+
       icon.setAttribute("data-tooltip", featuresWithTooltips[feature]);
       icon.style.cursor = "help";
       return icon;
     }
   }
 
-  // Create standard yes/no icons
+  // Standard icon creation for non-tooltip cases
   icon.setAttribute("role", "img");
   icon.setAttribute(
     "aria-label",
@@ -280,22 +372,21 @@ function createStatusIcon(status, feature, packageName) {
       <path d="M10.5 3.5L3.5 10.5M3.5 3.5L10.5 10.5" stroke="#B91C1C" stroke-width="2" stroke-linecap="round"/>
     </svg>`;
   }
+
   return icon;
 }
 
-/* ==========================================================================
-   Comparison Rendering
-   ========================================================================== */
 function renderComparison() {
   const p1 = packageSelect1.value;
   const p2 = packageSelect2.value;
   const showOnlyDiff = document.getElementById("diffToggle").checked;
   comparisonBody.innerHTML = "";
 
-  // Create main structure
+  // Create content wrapper
   const contentWrapper = document.createElement("div");
   contentWrapper.className = "content-wrapper";
 
+  // Create column wrappers
   const featureWrapper = document.createElement("div");
   featureWrapper.className = "feature-wrapper";
 
@@ -305,13 +396,12 @@ function renderComparison() {
   const statusWrapper2 = document.createElement("div");
   statusWrapper2.className = "status-wrapper";
 
-  // Assemble DOM structure
+  // Append column wrappers to content wrapper
   contentWrapper.appendChild(featureWrapper);
   contentWrapper.appendChild(statusWrapper1);
   contentWrapper.appendChild(statusWrapper2);
   comparisonBody.appendChild(contentWrapper);
 
-  // Render features and their statuses
   allFeatures.forEach((feature, index) => {
     const hasP1 = packagesData[p1].includes(feature) ? "Yes" : "No";
     const hasP2 = packagesData[p2].includes(feature) ? "Yes" : "No";
@@ -319,11 +409,11 @@ function renderComparison() {
     if (hasP1 === "Yes" || hasP2 === "Yes") {
       if (showOnlyDiff && hasP1 === hasP2) return;
 
-      // Create feature cell with hover effects
       const featureCell = document.createElement("div");
       featureCell.className = "feature-cell";
       featureCell.setAttribute("data-feature", `feature-${index}`);
 
+      // Add mouse enter/leave events
       featureCell.addEventListener("mouseenter", () => {
         document
           .querySelectorAll(`[data-feature="feature-${index}"] .status-icon`)
@@ -344,7 +434,6 @@ function renderComparison() {
         featureCell.style.transform = "translateX(0)";
       });
 
-      // Add vertical line and feature text
       const verticalLine = document.createElement("span");
       verticalLine.className = "vertical-line";
       featureCell.appendChild(verticalLine);
@@ -353,7 +442,6 @@ function renderComparison() {
       featureCell.appendChild(featureText);
       featureWrapper.appendChild(featureCell);
 
-      // Create status cells for both packages
       const statusCell1 = document.createElement("div");
       statusCell1.className = `status-cell ${
         hasP1 === "Yes" ? "status-yes" : "status-no"
@@ -375,14 +463,515 @@ function renderComparison() {
   });
 }
 
-/* ==========================================================================
-   Event Listeners
-   ========================================================================== */
 const diffToggle = document.getElementById("diffToggle");
 diffToggle.addEventListener("change", renderComparison);
 
 packageSelect1.addEventListener("change", renderComparison);
 packageSelect2.addEventListener("change", renderComparison);
-
-// Initial render
 renderComparison();
+
+
+================================================================================
+File: c:\Users\Nagrywanie\OneDrive - Sławomir Mentzen\Pulpit\PackageComparator\style.css
+================================================================================
+:root {
+  --app-dark-blue: #0e2334;
+  --app-medium-dark-blue: #1b374d;
+  --app-light-blue: #6798a8;
+  --app-white: #fff;
+  --app-primary: #285c7e;
+  --app-secondary: #f2f8fe;
+  --app-background: #f8f9fa;
+  --app-text: #1e293b;
+  --app-text-secondary: #475569;
+  --app-primary-gradient: linear-gradient(90deg, #285c7e 0%, #3875a0 100%);
+  --app-input-bg: #ffffff;
+  --app-border: #e2e8f0;
+  --app-hover: #f8fafc;
+  --app-error: #b91c1c;
+  --glass-bg: rgba(255, 255, 255, 0.96);
+  --glass-border: rgba(40, 92, 126, 0.05);
+  --Inter-font: "Inter", sans-serif;
+}
+
+/* Base Styles */
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--app-background);
+  font-family: var(--Inter-font);
+  color: var(--app-text);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: var(--Inter-font);
+}
+
+/* Layout Components */
+.comparison-app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+/* Header Components */
+.header {
+  padding: 8rem 2rem 4rem 2rem;
+  text-align: center;
+  color: var(--app-text);
+}
+
+.header h1 {
+  font-weight: 700;
+  font-size: 3.5rem;
+  margin: 0 auto;
+}
+
+/* Comparison Container Styles */
+.comparison-container {
+  width: 100%;
+  max-width: 1060px;
+  position: relative;
+}
+
+/* Comparison Header Styles */
+.comparison-header {
+  position: sticky;
+  top: 5px;
+  z-index: 10;
+  display: flex;
+  padding: 1rem;
+  max-width: 1060px;
+  width: 100%;
+  margin: 0px auto;
+  background: var(--app-dark-blue);
+  border-radius: 30px;
+}
+
+.comparison-header > div {
+  padding: 0 0.4rem;
+}
+
+.flex-container {
+  padding-left: 1.5rem;
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+}
+
+.feature-header {
+  flex: 2;
+  color: var(--app-white);
+  font-weight: 600;
+  font-size: 2rem;
+  margin-bottom: 0.6rem;
+  padding-left: 0.4rem;
+}
+
+.package-column {
+  flex: 1;
+  min-width: 200px;
+  position: relative;
+  align-content: center;
+}
+
+/* Comparison Body Styles */
+.comparison-body {
+  display: flex;
+  width: 100%;
+}
+
+/* Columns styles */
+.content-wrapper {
+  display: flex;
+  width: 100%;
+  gap: 30px;
+}
+
+.feature-wrapper {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px,
+    rgb(209, 213, 219) 0px 0px 0px 1px inset;
+  border-radius: 30px;
+}
+
+.status-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px,
+    rgb(209, 213, 219) 0px 0px 0px 1px inset;
+  border-radius: 30px;
+}
+
+@media (max-width: 700px) {
+  .content-wrapper {
+    flex-direction: column;
+  }
+
+  .feature-wrapper,
+  .status-wrapper {
+    width: 100%;
+  }
+}
+
+/* Cell Styles */
+.feature-cell {
+  flex: 2;
+  padding: 1.5rem 2rem 1.5rem 2rem;
+  display: flex;
+  height: 64px;
+  align-items: center;
+  transition: color 0.2s ease, transform 0.3s ease;
+  cursor: default;
+  transform: translateX(0);
+}
+
+.vertical-line {
+  display: inline-block;
+  min-width: 3px;
+  height: 100%;
+  background-color: var(--app-dark-blue);
+  margin-right: 10px;
+}
+
+.status-cell {
+  flex: 1;
+  padding: 1.5rem 2rem 1.5rem 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--app-text);
+  font-weight: 500;
+}
+
+/* Status Icons */
+.status-icon {
+  width: 32px;
+  height: 32px;
+  padding: 6px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.status-icon[data-tooltip] {
+  position: relative;
+}
+
+.status-icon[data-tooltip]:before,
+.status-icon[data-tooltip]:after {
+  position: absolute;
+  visibility: hidden;
+  opacity: 0;
+  transition: transform 200ms ease, opacity 200ms;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  z-index: 99;
+}
+
+.status-icon[data-tooltip]:before {
+  content: attr(data-tooltip);
+  background: var(--app-dark-blue);
+  color: var(--app-white);
+  font-size: 12px;
+  font-weight: bold;
+  padding: 8px 12px;
+  border-radius: 4px;
+  white-space: nowrap;
+  text-decoration: none;
+  letter-spacing: 0.5px;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  margin-bottom: 10px;
+}
+
+.status-icon[data-tooltip]:after {
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+  content: "";
+  border-top-color: var(--app-dark-blue);
+  border-bottom: none;
+  bottom: 101%;
+  left: calc(50% - 6px);
+  transform: translateY(10px);
+  margin-bottom: 4px;
+}
+
+.status-icon[data-tooltip]:hover:after,
+.status-icon[data-tooltip]:hover:before {
+  visibility: visible;
+  opacity: 0.95;
+  transform: translateX(-50%) translateY(0);
+}
+
+.status-icon[data-tooltip]:hover:after {
+  transform: translateY(0);
+}
+
+.status-yes .status-icon {
+  background-color: rgba(15, 118, 110, 0.1);
+}
+
+.status-no .status-icon {
+  background-color: rgba(185, 28, 28, 0.1);
+}
+
+.status-yes {
+  color: #0f766e;
+}
+
+.status-no {
+  color: var(--app-error);
+}
+
+/* Select Input Styles */
+.header-select {
+  width: 100%;
+  margin: 0;
+  padding: 12px 35px 12px 14px;
+  color: var(--app-text);
+  background: #fff
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' fill='none'%3E%3Cpath stroke='%23000' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m1 1 4 4 4-4'/%3E%3C/svg%3E")
+    calc(100% - 12px) center no-repeat;
+  border: 1px solid #e8e8ed;
+  border-radius: 5px;
+  font-size: 16px;
+  line-height: 1.2;
+  font-weight: 500;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  cursor: pointer;
+  transition: border-color 200ms ease;
+}
+
+.header-select:hover {
+  background-color: var(--app-hover);
+}
+
+/* Toggle Switch Styles */
+.toggle-container {
+  display: flex;
+  align-items: center;
+  gap: 0.1rem;
+  color: white;
+}
+
+.toggle-container span {
+  font-weight: 300;
+  opacity: 0.6;
+  letter-spacing: 0.3px;
+}
+
+.power-switch {
+  --color-invert: #ffffff;
+  --width: 32px;
+  --height: 32px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: var(--width);
+  height: var(--height);
+}
+.power-switch .button {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.power-switch .button:after {
+  content: "";
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background: radial-gradient(
+    circle closest-side,
+    var(--color-invert),
+    transparent
+  );
+  filter: blur(4px);
+  opacity: 0;
+  transition: opacity 1s ease, transform 1s ease;
+  transform: perspective(1px) translateZ(0);
+  backface-visibility: hidden;
+}
+.power-switch .power-on,
+.power-switch .power-off {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  z-index: 1;
+  fill: none;
+  stroke: var(--color-invert);
+  stroke-width: 6px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.power-switch .power-on .line,
+.power-switch .power-off .line {
+  opacity: 0.6;
+}
+.power-switch .power-on .circle,
+.power-switch .power-off .circle {
+  opacity: 0.6;
+  transform: rotate(-58deg);
+  transform-origin: center 17px;
+  stroke-dasharray: 220;
+  stroke-dashoffset: 40;
+}
+.power-switch .power-on {
+  filter: drop-shadow(0px 0px 2px rgba(255, 255, 255, 0.8));
+}
+.power-switch .power-on .line {
+  opacity: 0;
+  transition: opacity 0.3s ease 1s;
+}
+.power-switch .power-on .circle {
+  opacity: 1;
+  stroke-dashoffset: 220;
+  transition: transform 0s ease, stroke-dashoffset 1s ease 0s;
+}
+.power-switch input {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  z-index: 2;
+  cursor: pointer;
+  opacity: 0;
+}
+.power-switch input:checked + .button:after {
+  opacity: 0.15;
+  transform: scale(1.1) perspective(1px) translateZ(0);
+  backface-visibility: hidden;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.power-switch input:checked + .button .power-on,
+.power-switch input:checked + .button .power-off {
+  animation: click-animation 0.3s ease forwards;
+  transform: scale(1);
+}
+.power-switch input:checked + .button .power-on .line {
+  animation: line-animation 0.8s ease-in forwards;
+  opacity: 1;
+  transition: opacity 0.05s ease-in 0.55s;
+}
+.power-switch input:checked + .button .power-on .circle {
+  transform: rotate(302deg);
+  stroke-dashoffset: 40;
+  transition: transform 0.4s ease 0.2s, stroke-dashoffset 0.4s ease 0.2s;
+}
+
+@keyframes line-animation {
+  0% {
+    transform: translateY(0);
+  }
+  10% {
+    transform: translateY(10px);
+  }
+  40% {
+    transform: translateY(-25px);
+  }
+  60% {
+    transform: translateY(-25px);
+  }
+  85% {
+    transform: translateY(10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+@keyframes click-animation {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1) translateY(-2px);
+  }
+}
+
+@keyframes scaleUp {
+  0% {
+    transform: scale(1);
+    box-shadow: none;
+  }
+  100% {
+    transform: scale(1.05);
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+  }
+}
+
+/* Utility Classes */
+.hidden-row {
+  display: none;
+}
+
+/* Media Queries */
+@media (max-width: 700px) {
+  .header h1 {
+    font-size: 1.2rem;
+  }
+
+  .comparison-header {
+    display: none;
+  }
+
+  .comparison-row {
+    flex-direction: column;
+    margin-bottom: 1rem;
+  }
+
+  .feature-cell {
+    width: 100%;
+    background-color: #f8fafc;
+  }
+
+  .status-cell {
+    width: 100%;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
+  }
+
+  .status-cell::before {
+    content: attr(data-label);
+    font-weight: 600;
+    margin-right: 1rem;
+  }
+
+  .header-select {
+    width: 100%;
+    max-width: 200px;
+  }
+}

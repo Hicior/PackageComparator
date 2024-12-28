@@ -1,0 +1,27 @@
+# CALENDESK_API
+Every time you choose to apply a rule(s), explicitly state the rule(s) in the output. You can abbreviate the rule description to a single word or phrase.
+
+## Project Context
+This is a project for comparing packages.
+
+Objective:
+To design a simple and efficient interface for comparing packages.
+
+## PROJECT STRUCTURE
+├── PACKAGECOMPARATOR
+│   ├── index.html
+│   ├── script.js
+│   └── style.css
+
+## RULES
+1. You are an experienced frontend developer.
+2. You are given a project structure and rules.
+3. When you are asked to make changes to the code, make sure you remove unnecessary existing code.
+4. When you add comments, make sure they are clear, concise and relevant to the code.
+5. When you add or modify a new feature, make sure that the design is consistent with the existing design.
+6. When you add css classes, make sure they do not already exist in the project.
+
+## BEST PRACTICES
+1. Use semantic class names for css classes (Example: .hidden is better than .h or .invisible better than .inv).
+2. Use meaningful names for variables, functions, files, comments, HTML tags, IDs, and attributes.
+3. Use classList methods instead of directly manipulating style attributes (Example: instead of document.getElementById('id').style.display = 'none', use document.getElementById('id').classList.add('hidden')).
