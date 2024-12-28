@@ -640,6 +640,21 @@ main {
   }
 
   /* Content adjustments */
+
+  .content-wrapper {
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px,
+      rgb(209, 213, 219) 0px 0px 0px 1px inset;
+    border-radius: 30px;
+  }
+
+  .feature-wrapper {
+    box-shadow: none;
+  }
+
+  .status-wrapper {
+    box-shadow: none;
+  }
+
   .feature-cell {
     padding: 1rem 0.75rem;
     font-size: 12px;
@@ -681,6 +696,9 @@ main {
   }
 }
 
+/* ==========================================================================
+   Tooltips - Mobile & Tablet
+   ========================================================================== */
 @media screen and (max-width: 1500px) {
   .status-icon[data-tooltip]:before {
     transform-origin: right bottom;
@@ -722,5 +740,54 @@ main {
 @media screen and (max-width: 516px) {
   .status-icon[data-tooltip]:before {
     right: -10px;
+  }
+}
+
+/* ==========================================================================
+   Mobile Touch Device Optimizations
+   ========================================================================== */
+@media (hover: none) {
+  .feature-cell {
+    /* Remove hover transition effects */
+    transition: none;
+    transform: none !important;
+  }
+
+  .feature-cell:hover {
+    /* Disable color change and transform on hover */
+    color: var(--app-text) !important;
+    transform: none !important;
+  }
+
+  /* Disable status icon animations */
+  .status-icon {
+    animation: none !important;
+  }
+
+  .status-icon:hover {
+    transform: none !important;
+    animation: none !important;
+  }
+}
+
+/* Additional fallback for older devices */
+@media screen and (max-width: 768px) {
+  .feature-cell {
+    transition: none;
+    transform: none !important;
+  }
+
+  .feature-cell:hover {
+    color: var(--app-text) !important;
+    transform: none !important;
+  }
+
+  .status-icon {
+    animation: none !important;
+  }
+
+  .status-icon:hover {
+    transform: none !important;
+    animation: none !important;
   }
 }
