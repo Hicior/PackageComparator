@@ -156,7 +156,7 @@
     flex: 2;
     padding: 1.5rem 2rem 1.5rem 2rem;
     display: flex;
-    height: 64px;
+    height: 0px;
     align-items: center;
     transition: color 0.2s ease, transform 0.3s ease;
     cursor: default;
@@ -524,7 +524,6 @@
     .package-comparator-wrapper .feature-cell {
       padding: 1.25rem 1rem;
       font-size: 14px;
-      height: 56px;
     }
   
     .package-comparator-wrapper .status-cell {
@@ -587,7 +586,6 @@
     .package-comparator-wrapper .feature-cell {
       padding: 1rem 0.75rem;
       font-size: 13px;
-      height: 48px;
     }
   
     .package-comparator-wrapper .status-cell {
@@ -653,7 +651,6 @@
     .package-comparator-wrapper .feature-cell {
       padding: 1rem 0.75rem;
       font-size: 12px;
-      height: 44px;
     }
   
     .package-comparator-wrapper .status-cell {
