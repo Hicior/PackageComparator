@@ -1,787 +1,798 @@
 /* ==========================================================================
    CSS Variables & Root Settings
    ========================================================================== */
-:root {
-  --app-dark-blue: #0e2334;
-  --app-medium-dark-blue: #1b374d;
-  --app-light-blue: #6798a8;
-  --app-white: #fff;
-  --app-primary: #285c7e;
-  --app-secondary: #f2f8fe;
-  --app-background: #f8f9fa;
-  --app-text: #1e293b;
-  --app-text-secondary: #475569;
-  --app-primary-gradient: linear-gradient(90deg, #285c7e 0%, #3875a0 100%);
-  --app-input-bg: #ffffff;
-  --app-border: #e2e8f0;
-  --app-hover: #f8fafc;
-  --app-error: #b91c1c;
-  --glass-bg: rgba(255, 255, 255, 0.96);
-  --glass-border: rgba(40, 92, 126, 0.05);
-  --Inter-font: "Inter", sans-serif;
-}
-
-/* ==========================================================================
-   Base Styles
-   ========================================================================== */
-.package-comparator-wrapper {
-  margin: 0;
-  padding: 0;
-  background: var(--app-background);
-  font-family: var(--Inter-font);
-  color: var(--app-text);
-  box-sizing: border-box;
-}
-
-/* ==========================================================================
-   Layout Components
-   ========================================================================== */
-.comparison-app {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
-main {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 2rem;
-}
-
-/* Header Styles */
-.header {
-  padding: 8rem 2rem 4rem 2rem;
-  text-align: center;
-  color: var(--app-text);
-}
-
-.header h1 {
-  font-weight: 700;
-  font-size: 3.5rem;
-  margin: 0 auto;
-}
-
-/* ==========================================================================
-   Comparison Components
-   ========================================================================== */
-.comparison-container {
-  width: 100%;
-  max-width: 1060px;
-  position: relative;
-}
-
-/* Comparison Header */
-.comparison-header-wrapper {
-  position: sticky;
-  top: 5px;
-  z-index: 10;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0 2rem;
-}
-
-.comparison-header {
-  display: flex;
-  padding: 1rem;
-  max-width: 1060px;
-  width: 100%;
-  background: var(--app-dark-blue);
-  border-radius: 30px;
-}
-
-.comparison-header > div {
-  padding: 0 0.4rem;
-}
-
-/* Comparison Layout */
-.flex-container {
-  padding-left: 1.5rem;
-  flex: 2;
-  display: flex;
-  flex-direction: column;
-}
-
-.feature-header {
-  flex: 2;
-  color: var(--app-white);
-  font-weight: 600;
-  font-size: 2rem;
-  margin-bottom: 0.6rem;
-  padding-left: 0.4rem;
-}
-
-.package-column {
-  flex: 1;
-  min-width: 200px;
-  position: relative;
-  align-content: center;
-}
-
-/* ==========================================================================
-   Content Grid
-   ========================================================================== */
-.comparison-body {
-  display: flex;
-  width: 100%;
-}
-
-.content-wrapper {
-  display: flex;
-  width: 100%;
-  gap: 30px;
-}
-
-.feature-wrapper {
-  flex: 2;
-  display: flex;
-  flex-direction: column;
-  box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px,
-    rgb(209, 213, 219) 0px 0px 0px 1px inset;
-  border-radius: 30px;
-}
-
-.status-wrapper {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px,
-    rgb(209, 213, 219) 0px 0px 0px 1px inset;
-  border-radius: 30px;
-}
-
-/* Grid Cells */
-.feature-cell {
-  flex: 2;
-  padding: 1.5rem 2rem 1.5rem 2rem;
-  display: flex;
-  height: 64px;
-  align-items: center;
-  transition: color 0.2s ease, transform 0.3s ease;
-  cursor: default;
-  transform: translateX(0);
-}
-
-.status-cell {
-  flex: 1;
-  padding: 1.5rem 2rem 1.5rem 2rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: var(--app-text);
-  font-weight: 500;
-}
-
-/* ==========================================================================
-   UI Components
-   ========================================================================== */
-/* Vertical Line Separator */
-.vertical-line {
-  display: inline-block;
-  min-width: 3px;
-  height: 100%;
-  background-color: var(--app-dark-blue);
-  margin-right: 10px;
-}
-
-/* Status Icons */
-.status-icon {
-  width: 32px;
-  height: 32px;
-  padding: 6px;
-  border-radius: 50%;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* Status Colors */
-.status-yes .status-icon {
-  background-color: rgba(15, 118, 110, 0.1);
-}
-
-.status-no .status-icon {
-  background-color: rgba(185, 28, 28, 0.1);
-}
-
-.status-yes {
-  color: #0f766e;
-}
-
-.status-no {
-  color: var(--app-error);
-}
-
-/* Select Dropdown */
-.header-select {
-  width: 100%;
-  margin: 0;
-  padding: 12px 35px 12px 14px;
-  color: var(--app-text);
-  background: #fff
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' fill='none'%3E%3Cpath stroke='%23000' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m1 1 4 4 4-4'/%3E%3C/svg%3E")
-    calc(100% - 12px) center no-repeat;
-  border: 1px solid #e8e8ed;
-  border-radius: 5px;
-  font-size: 16px;
-  line-height: 1.2;
-  font-weight: 500;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  cursor: pointer;
-  transition: border-color 200ms ease;
-}
-
-.header-select:hover {
-  background-color: var(--app-hover);
-}
-
-/* ==========================================================================
-   Toggle Switch Component
-   ========================================================================== */
-.toggle-container {
-  display: flex;
-  align-items: center;
-  gap: 0.1rem;
-  color: white;
-}
-
-.toggle-container span {
-  font-weight: 300;
-  opacity: 0.6;
-  letter-spacing: 0.3px;
-}
-
-/* Power Switch Styles */
-.power-switch {
-  --color-invert: #ffffff;
-  --width: 32px;
-  --height: 32px;
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: var(--width);
-  height: var(--height);
-}
-
-.power-switch .button {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-}
-
-.power-switch .button:after {
-  content: "";
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  background: radial-gradient(
-    circle closest-side,
-    var(--color-invert),
-    transparent
-  );
-  filter: blur(4px);
-  opacity: 0;
-  transition: opacity 1s ease, transform 1s ease;
-  transform: perspective(1px) translateZ(0);
-  backface-visibility: hidden;
-}
-
-.power-switch .power-on,
-.power-switch .power-off {
-  height: 100%;
-  width: 100%;
-  position: absolute;
-  z-index: 1;
-  fill: none;
-  stroke: var(--color-invert);
-  stroke-width: 6px;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-.power-switch .power-on .line,
-.power-switch .power-off .line {
-  opacity: 0.6;
-}
-
-.power-switch .power-on .circle,
-.power-switch .power-off .circle {
-  opacity: 0.6;
-  transform: rotate(-58deg);
-  transform-origin: center 17px;
-  stroke-dasharray: 220;
-  stroke-dashoffset: 40;
-}
-
-.power-switch .power-on {
-  filter: drop-shadow(0px 0px 2px rgba(255, 255, 255, 0.8));
-}
-
-.power-switch .power-on .line {
-  opacity: 0;
-  transition: opacity 0.3s ease 1s;
-}
-
-.power-switch .power-on .circle {
-  opacity: 1;
-  stroke-dashoffset: 220;
-  transition: transform 0s ease, stroke-dashoffset 1s ease 0s;
-}
-
-.power-switch input {
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  z-index: 2;
-  cursor: pointer;
-  opacity: 0;
-}
-
-.power-switch input:checked + .button:after {
-  opacity: 0.15;
-  transform: scale(1.1) perspective(1px) translateZ(0);
-  backface-visibility: hidden;
-  transition: opacity 0.5s ease, transform 0.5s ease;
-}
-
-.power-switch input:checked + .button .power-on,
-.power-switch input:checked + .button .power-off {
-  animation: click-animation 0.3s ease forwards;
-  transform: scale(1);
-}
-
-.power-switch input:checked + .button .power-on .line {
-  animation: line-animation 0.8s ease-in forwards;
-  opacity: 1;
-  transition: opacity 0.05s ease-in 0.55s;
-}
-
-.power-switch input:checked + .button .power-on .circle {
-  transform: rotate(302deg);
-  stroke-dashoffset: 40;
-  transition: transform 0.4s ease 0.2s, stroke-dashoffset 0.4s ease 0.2s;
-}
-
-@keyframes line-animation {
-  0% {
-    transform: translateY(0);
+   :root {
+    --app-dark-blue: #0e2334;
+    --app-medium-dark-blue: #1b374d;
+    --app-light-blue: #6798a8;
+    --app-white: #fff;
+    --app-primary: #285c7e;
+    --app-secondary: #f2f8fe;
+    --app-background: #f8f9fa;
+    --app-text: #1e293b;
+    --app-text-secondary: #475569;
+    --app-primary-gradient: linear-gradient(90deg, #285c7e 0%, #3875a0 100%);
+    --app-input-bg: #ffffff;
+    --app-border: #e2e8f0;
+    --app-hover: #f8fafc;
+    --app-error: #b91c1c;
+    --glass-bg: rgba(255, 255, 255, 0.96);
+    --glass-border: rgba(40, 92, 126, 0.05);
+    --Inter-font: "Inter", sans-serif;
   }
-  10% {
-    transform: translateY(10px);
+  
+  /* ==========================================================================
+     Base Styles
+     ========================================================================== */
+  .package-comparator-wrapper {
+    margin: 0;
+    padding: 0;
+    background: var(--app-background);
+    font-family: var(--Inter-font);
+    color: var(--app-text);
+    box-sizing: border-box;
   }
-  40% {
-    transform: translateY(-25px);
+  
+  /* ==========================================================================
+     Layout Components
+     ========================================================================== */
+  .package-comparator-wrapper .comparison-app {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
   }
-  60% {
-    transform: translateY(-25px);
+  
+  .package-comparator-wrapper main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
   }
-  85% {
-    transform: translateY(10px);
+  
+  /* Header Styles */
+  .package-comparator-wrapper .header {
+    padding: 8rem 2rem 4rem 2rem;
+    text-align: center;
+    color: var(--app-text);
   }
-  100% {
-    transform: translateY(0px);
+  
+  .package-comparator-wrapper .header h1 {
+    font-weight: 700;
+    font-size: 3.5rem;
+    margin: 0 auto;
   }
-}
-
-@keyframes click-animation {
-  0% {
-    transform: scale(1);
+  
+  /* ==========================================================================
+     Comparison Components
+     ========================================================================== */
+  .package-comparator-wrapper .comparison-container {
+    width: 100%;
+    max-width: 1060px;
+    position: relative;
   }
-  50% {
-    transform: scale(0.9);
+  
+  /* Comparison Header */
+  .package-comparator-wrapper .comparison-header-wrapper {
+    position: sticky;
+    top: 5px;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 2rem;
   }
-  100% {
-    transform: scale(1);
+  
+  .package-comparator-wrapper .comparison-header {
+    display: flex;
+    padding: 1rem;
+    max-width: 1060px;
+    width: 100%;
+    background: var(--app-dark-blue);
+    border-radius: 30px;
   }
-}
-
-@keyframes bounce {
-  0%,
-  100% {
-    transform: scale(1);
+  
+  .package-comparator-wrapper .comparison-header > div {
+    padding: 0 0.4rem;
   }
-  50% {
-    transform: scale(1.1) translateY(-2px);
+  
+  /* Comparison Layout */
+  .package-comparator-wrapper .flex-container {
+    padding-left: 1.5rem;
+    flex: 2;
+    display: flex;
+    flex-direction: column;
   }
-}
-
-@keyframes scaleUp {
-  0% {
-    transform: scale(1);
-    box-shadow: none;
-  }
-  100% {
-    transform: scale(1.05);
-    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
-  }
-}
-
-/* ==========================================================================
-   Tooltips
-   ========================================================================== */
-.status-icon[data-tooltip] {
-  position: relative;
-}
-
-.status-icon[data-tooltip]:before,
-.status-icon[data-tooltip]:after {
-  position: absolute;
-  visibility: hidden;
-  opacity: 0;
-  transition: transform 200ms ease, opacity 200ms;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-  z-index: 102;
-}
-
-.status-icon[data-tooltip]:before {
-  content: attr(data-tooltip);
-  background: var(--app-dark-blue);
-  color: var(--app-white);
-  font-size: 12px;
-  font-weight: bold;
-  padding: 8px 12px;
-  border-radius: 4px;
-  white-space: nowrap;
-  text-decoration: none;
-  letter-spacing: 0.5px;
-  bottom: 100%;
-  left: 50%;
-  transform: translateX(-50%) translateY(10px);
-  margin-bottom: 10px;
-}
-
-.status-icon[data-tooltip]:after {
-  width: 0;
-  height: 0;
-  border: 6px solid transparent;
-  content: "";
-  border-top-color: var(--app-dark-blue);
-  border-bottom: none;
-  bottom: 101%;
-  left: calc(50% - 6px);
-  transform: translateY(10px);
-  margin-bottom: 4px;
-}
-
-.status-icon[data-tooltip]:hover:after,
-.status-icon[data-tooltip]:hover:before {
-  visibility: visible;
-  opacity: 0.95;
-  transform: translateX(-50%) translateY(0);
-}
-
-.status-icon[data-tooltip]:hover:after {
-  transform: translateY(0);
-}
-
-/* ==========================================================================
-   Utility Classes
-   ========================================================================== */
-.hidden-row {
-  display: none;
-}
-
-/* ==========================================================================
-   Media Queries
-   ========================================================================== */
-@media screen and (max-width: 970px) {
-  /* Header adjustments */
-  .header {
-    padding: 6rem 1rem 3rem 1rem;
-  }
-
-  .header h1 {
-    font-size: 2.5rem;
-  }
-
-  /* Comparison header adjustments */
-
-  .comparison-header {
-    padding: 0.75rem;
-  }
-
-  .feature-header {
-    font-size: 1.5rem;
-  }
-
-  .header-select {
-    padding: 8px 30px 8px 10px;
-    font-size: 14px;
-  }
-
-  /* Content adjustments */
-  .feature-wrapper {
-    flex: 3;
-  }
-
-  .feature-cell {
-    padding: 1.25rem 1rem;
-    font-size: 14px;
-    height: 56px;
-  }
-
-  .status-cell {
-    padding: 1.25rem 1rem;
-  }
-
-  /* Toggle container adjustments */
-  .toggle-container {
-    gap: 0.5rem;
-  }
-
-  .toggle-container span {
-    font-size: 12px;
-  }
-
-  /* Adjust spacing between columns */
-  .content-wrapper {
-    gap: 15px;
-  }
-
-  /* Adjust vertical line size */
-  .vertical-line {
-    min-width: 2px;
-    margin-right: 8px;
-  }
-
-  /* Status icon adjustments */
-  .status-icon {
-    width: 28px;
-    height: 28px;
-    padding: 5px;
-  }
-}
-
-@media screen and (max-width: 768px) {
-  /* Header adjustments */
-  .comparison-header-wrapper {
-    padding: 0 0.5rem;
-  }
-
-  .header {
-    padding: 4rem 0.5rem 2rem 0.5rem;
-  }
-
-  .header h1 {
+  
+  .package-comparator-wrapper .feature-header {
+    flex: 2;
+    color: var(--app-white);
+    font-weight: 600;
     font-size: 2rem;
+    margin-bottom: 0.6rem;
+    padding-left: 0.4rem;
   }
-
-  /* Comparison header adjustments */
-  .feature-header {
-    font-size: 1.25rem;
+  
+  .package-comparator-wrapper .package-column {
+    flex: 1;
+    min-width: 200px;
+    position: relative;
+    align-content: center;
   }
-
-  /* Content adjustments */
-  .feature-wrapper {
-    flex: 4;
+  
+  /* ==========================================================================
+     Content Grid
+     ========================================================================== */
+  .package-comparator-wrapper .comparison-body {
+    display: flex;
+    width: 100%;
   }
-
-  .feature-cell {
-    padding: 1rem 0.75rem;
-    font-size: 13px;
-    height: 48px;
+  
+  .package-comparator-wrapper .content-wrapper {
+    display: flex;
+    width: 100%;
+    gap: 30px;
   }
-
-  .status-cell {
-    padding: 1rem 0.75rem;
-  }
-
-  /* Adjust spacing between columns */
-  .content-wrapper {
-    gap: 10px;
-  }
-
-  /* Package column adjustments */
-  .package-column {
-    min-width: 150px;
-  }
-
-  /* Header select adjustments */
-  .header-select {
-    font-size: 13px;
-    padding: 6px 25px 6px 8px;
-  }
-
-  /* Status icon adjustments */
-  .status-icon {
-    width: 24px;
-    height: 24px;
-    padding: 4px;
-  }
-
-  /* Main padding adjustment */
-  main {
-    padding: 0.5rem;
-  }
-}
-
-@media screen and (max-width: 516px) {
-  /* Header adjustments */
-  .header h1 {
-    font-size: 1.75rem;
-  }
-
-  /* Package column adjustments */
-  .package-column {
-    min-width: 120px;
-  }
-
-  /* Content adjustments */
-
-  .content-wrapper {
+  
+  .package-comparator-wrapper .feature-wrapper {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
     box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px,
       rgb(209, 213, 219) 0px 0px 0px 1px inset;
     border-radius: 30px;
   }
-
-  .feature-wrapper {
-    box-shadow: none;
-  }
-
-  .status-wrapper {
-    box-shadow: none;
-  }
-
-  .feature-cell {
-    padding: 1rem 0.75rem;
-    font-size: 12px;
-    height: 44px;
-  }
-
-  .status-cell {
-    padding: 1rem 0.75rem;
-  }
-
-  /* Toggle container adjustments */
-  .toggle-container span {
-    font-size: 11px;
-  }
-
-  /* Header select adjustments */
-  .header-select {
-    font-size: 12px;
-    padding: 5px 20px 5px 6px;
-  }
-}
-
-@media screen and (max-width: 480px) {
-  .feature-wrapper {
-    flex: 5;
-  }
-
-  .feature-cell {
-    padding: 1.5rem 0.75rem;
-  }
-
-  .status-cell {
-    padding: 1.5rem 0.75rem;
-  }
-
-  .comparison-header {
+  
+  .package-comparator-wrapper .status-wrapper {
+    flex: 1;
+    display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px,
+      rgb(209, 213, 219) 0px 0px 0px 1px inset;
+    border-radius: 30px;
   }
-}
-
-/* ==========================================================================
-   Tooltips - Mobile & Tablet
-   ========================================================================== */
-@media screen and (max-width: 1500px) {
-  .status-icon[data-tooltip]:before {
-    transform-origin: right bottom;
-    left: auto;
-    right: -100px;
+  
+  /* Grid Cells */
+  .package-comparator-wrapper .feature-cell {
+    flex: 2;
+    padding: 1.5rem 2rem 1.5rem 2rem;
+    display: flex;
+    height: 64px;
+    align-items: center;
+    transition: color 0.2s ease, transform 0.3s ease;
+    cursor: default;
+    transform: translateX(0);
+  }
+  
+  .package-comparator-wrapper .status-cell {
+    flex: 1;
+    padding: 1.5rem 2rem 1.5rem 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--app-text);
+    font-weight: 500;
+  }
+  
+  /* ==========================================================================
+     UI Components
+     ========================================================================== */
+  /* Vertical Line Separator */
+  .package-comparator-wrapper .vertical-line {
+    display: inline-block;
+    min-width: 3px;
+    height: 100%;
+    background-color: var(--app-dark-blue);
+    margin-right: 10px;
+  }
+  
+  /* Status Icons */
+  .package-comparator-wrapper .status-icon {
+    width: 24px;
+    height: 24px;
+    padding: 6px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Status Colors */
+  .package-comparator-wrapper .status-yes .status-icon {
+    background-color: rgba(15, 118, 110, 0.1);
+  }
+  
+  .package-comparator-wrapper .status-no .status-icon {
+    background-color: rgba(185, 28, 28, 0.1);
+  }
+  
+  .package-comparator-wrapper .status-yes {
+    color: #0f766e;
+  }
+  
+  .package-comparator-wrapper .status-no {
+    color: var(--app-error);
+  }
+  
+  /* Select Dropdown */
+  .package-comparator-wrapper .header-select {
+    width: 100%;
+    margin: 0;
+    padding: 12px 35px 12px 14px;
+    color: var(--app-text);
+    background: #fff
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' fill='none'%3E%3Cpath stroke='%23000' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m1 1 4 4 4-4'/%3E%3C/svg%3E")
+      calc(100% - 12px) center no-repeat;
+    border: 1px solid #e8e8ed;
+    border-radius: 5px;
+    font-size: 16px;
+    line-height: 1.2;
+    font-weight: 500;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    cursor: pointer;
+    transition: border-color 200ms ease;
+  }
+  
+  .package-comparator-wrapper .header-select:hover {
+    background-color: var(--app-hover);
+  }
+  
+  /* ==========================================================================
+     Toggle Switch Component
+     ========================================================================== */
+  .package-comparator-wrapper .toggle-container {
+    display: flex;
+    align-items: center;
+    gap: 0.1rem;
+    color: white;
+  }
+  
+  .package-comparator-wrapper .toggle-container span {
+    font-weight: 300;
+    opacity: 0.6;
+    letter-spacing: 0.3px;
+  }
+  
+  /* Power Switch Styles */
+  .package-comparator-wrapper .power-switch {
+    --color-invert: #ffffff;
+    --width: 32px;
+    --height: 32px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: var(--width);
+    height: var(--height);
+  }
+  
+  .package-comparator-wrapper .power-switch .button {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+  
+  .package-comparator-wrapper .power-switch .button:after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background: radial-gradient(circle closest-side, var(--color-invert), transparent);
+    filter: blur(4px);
+    opacity: 0;
+    transition: opacity 1s ease, transform 1s ease;
+    transform: perspective(1px) translateZ(0);
+    backface-visibility: hidden;
+  }
+  
+  .package-comparator-wrapper .power-switch .power-on,
+  .package-comparator-wrapper .power-switch .power-off {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    z-index: 1;
+    fill: none;
+    stroke: var(--color-invert);
+    stroke-width: 6px;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  
+  .package-comparator-wrapper .power-switch .power-on .line,
+  .package-comparator-wrapper .power-switch .power-off .line {
+    opacity: 0.6;
+  }
+  
+  .package-comparator-wrapper .power-switch .power-on .circle,
+  .package-comparator-wrapper .power-switch .power-off .circle {
+    opacity: 0.6;
+    transform: rotate(-58deg);
+    transform-origin: center 17px;
+    stroke-dasharray: 220;
+    stroke-dashoffset: 40;
+  }
+  
+  .package-comparator-wrapper .power-switch .power-on {
+    filter: drop-shadow(0px 0px 2px rgba(255, 255, 255, 0.8));
+  }
+  
+  .package-comparator-wrapper .power-switch .power-on .line {
+    opacity: 0;
+    transition: opacity 0.3s ease 1s;
+  }
+  
+  .package-comparator-wrapper .power-switch .power-on .circle {
+    opacity: 1;
+    stroke-dashoffset: 220;
+    transition: transform 0s ease, stroke-dashoffset 1s ease 0s;
+  }
+  
+  .package-comparator-wrapper .power-switch input {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: 2;
+    cursor: pointer;
+    opacity: 0;
+  }
+  
+  .package-comparator-wrapper .power-switch input:checked + .button:after {
+    opacity: 0.15;
+    transform: scale(1.1) perspective(1px) translateZ(0);
+    backface-visibility: hidden;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  
+  .package-comparator-wrapper .power-switch input:checked + .button .power-on,
+  .package-comparator-wrapper .power-switch input:checked + .button .power-off {
+    animation: click-animation 0.3s ease forwards;
+    transform: scale(1);
+  }
+  
+  .package-comparator-wrapper .power-switch input:checked + .button .power-on .line {
+    animation: line-animation 0.8s ease-in forwards;
+    opacity: 1;
+    transition: opacity 0.05s ease-in 0.55s;
+  }
+  
+  .package-comparator-wrapper .power-switch input:checked + .button .power-on .circle {
+    transform: rotate(302deg);
+    stroke-dashoffset: 40;
+    transition: transform 0.4s ease 0.2s, stroke-dashoffset 0.4s ease 0.2s;
+  }
+  
+  /* ==========================================================================
+     Keyframes
+     ========================================================================== */
+  @keyframes line-animation {
+    0% {
+      transform: translateY(0);
+    }
+    10% {
+      transform: translateY(10px);
+    }
+    40% {
+      transform: translateY(-25px);
+    }
+    60% {
+      transform: translateY(-25px);
+    }
+    85% {
+      transform: translateY(10px);
+    }
+    100% {
+      transform: translateY(0px);
+    }
+  }
+  
+  @keyframes click-animation {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(0.9);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  
+  @keyframes bounce {
+    0%,
+    100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1) translateY(-2px);
+    }
+  }
+  
+  @keyframes scaleUp {
+    0% {
+      transform: scale(1);
+      box-shadow: none;
+    }
+    100% {
+      transform: scale(1.05);
+      box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px,
+        rgba(0, 0, 0, 0.24) 0px 1px 2px;
+    }
+  }
+  
+  /* ==========================================================================
+     Tooltips
+     ========================================================================== */
+  .package-comparator-wrapper .status-icon[data-tooltip] {
+    position: relative;
+  }
+  
+  .package-comparator-wrapper .status-icon[data-tooltip]:before,
+  .package-comparator-wrapper .status-icon[data-tooltip]:after {
+    position: absolute;
+    visibility: hidden;
+    opacity: 0;
+    transition: transform 200ms ease, opacity 200ms;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    z-index: 102;
+  }
+  
+  .package-comparator-wrapper .status-icon[data-tooltip]:before {
+    content: attr(data-tooltip);
+    background: var(--app-dark-blue);
+    color: var(--app-white);
+    font-size: 12px;
+    font-weight: bold;
+    padding: 8px 12px;
+    border-radius: 4px;
+    white-space: nowrap;
+    text-decoration: none;
+    letter-spacing: 0.5px;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    margin-bottom: 10px;
+  }
+  
+  .package-comparator-wrapper .status-icon[data-tooltip]:after {
+    width: 0;
+    height: 0;
+    border: 6px solid transparent;
+    content: "";
+    border-top-color: var(--app-dark-blue);
+    border-bottom: none;
+    bottom: 101%;
+    left: calc(50% - 6px);
     transform: translateY(10px);
+    margin-bottom: 4px;
   }
-
-  .status-icon[data-tooltip]:after {
-    left: auto;
-    right: 4px;
+  
+  .package-comparator-wrapper .status-icon[data-tooltip]:hover:after,
+  .package-comparator-wrapper .status-icon[data-tooltip]:hover:before {
+    visibility: visible;
+    opacity: 0.95;
+    transform: translateX(-50%) translateY(0);
   }
-
-  .status-icon[data-tooltip]:hover:before {
+  
+  .package-comparator-wrapper .status-icon[data-tooltip]:hover:after {
     transform: translateY(0);
   }
-
-  /* Override the default tooltip hover transform */
-  .status-icon[data-tooltip]:hover:after,
-  .status-icon[data-tooltip]:hover:before {
-    transform: translateY(0);
+  
+  /* ==========================================================================
+     Utility Classes
+     ========================================================================== */
+  .package-comparator-wrapper .hidden-row {
+    display: none;
   }
-}
-
-@media screen and (max-width: 980px) {
-  .status-icon[data-tooltip]:before {
-    right: -50px;
+  
+  /* ==========================================================================
+     Media Queries
+     ========================================================================== */
+  /* -- Desktop to Large Tablets -- */
+  @media screen and (max-width: 970px) {
+    /* Header adjustments */
+    .package-comparator-wrapper .header {
+      padding: 6rem 1rem 3rem 1rem;
+    }
+  
+    .package-comparator-wrapper .header h1 {
+      font-size: 2.5rem;
+    }
+  
+    /* Comparison header adjustments */
+    .package-comparator-wrapper .comparison-header {
+      padding: 0.75rem;
+    }
+  
+    .package-comparator-wrapper .feature-header {
+      font-size: 1.5rem;
+    }
+  
+    .package-comparator-wrapper .header-select {
+      padding: 8px 30px 8px 10px;
+      font-size: 14px;
+    }
+  
+    /* Content adjustments */
+    .package-comparator-wrapper .feature-wrapper {
+      flex: 3;
+    }
+  
+    .package-comparator-wrapper .feature-cell {
+      padding: 1.25rem 1rem;
+      font-size: 14px;
+      height: 56px;
+    }
+  
+    .package-comparator-wrapper .status-cell {
+      padding: 1.25rem 1rem;
+    }
+  
+    /* Toggle container adjustments */
+    .package-comparator-wrapper .toggle-container {
+      gap: 0.5rem;
+    }
+  
+    .package-comparator-wrapper .toggle-container span {
+      font-size: 12px;
+    }
+  
+    /* Adjust spacing between columns */
+    .package-comparator-wrapper .content-wrapper {
+      gap: 15px;
+    }
+  
+    /* Adjust vertical line size */
+    .package-comparator-wrapper .vertical-line {
+      min-width: 2px;
+      margin-right: 8px;
+    }
+  
+    /* Status icon adjustments */
+    .package-comparator-wrapper .status-icon {
+      width: 28px;
+      height: 28px;
+      padding: 5px;
+    }
   }
-}
-
-@media screen and (max-width: 768px) {
-  .status-icon[data-tooltip]:before {
-    right: -20px;
-    min-width: 180px;
-    white-space: normal;
+  
+  /* -- Tablets -- */
+  @media screen and (max-width: 768px) {
+    /* Header adjustments */
+    .package-comparator-wrapper .comparison-header-wrapper {
+      padding: 0 0.5rem;
+    }
+  
+    .package-comparator-wrapper .header {
+      padding: 4rem 0.5rem 2rem 0.5rem;
+    }
+  
+    .package-comparator-wrapper .header h1 {
+      font-size: 2rem;
+    }
+  
+    /* Comparison header adjustments */
+    .package-comparator-wrapper .feature-header {
+      font-size: 1.25rem;
+    }
+  
+    /* Content adjustments */
+    .package-comparator-wrapper .feature-wrapper {
+      flex: 4;
+    }
+  
+    .package-comparator-wrapper .feature-cell {
+      padding: 1rem 0.75rem;
+      font-size: 13px;
+      height: 48px;
+    }
+  
+    .package-comparator-wrapper .status-cell {
+      padding: 1rem 0.75rem;
+    }
+  
+    /* Adjust spacing between columns */
+    .package-comparator-wrapper .content-wrapper {
+      gap: 10px;
+    }
+  
+    /* Package column adjustments */
+    .package-comparator-wrapper .package-column {
+      min-width: 150px;
+    }
+  
+    /* Header select adjustments */
+    .package-comparator-wrapper .header-select {
+      font-size: 13px;
+      padding: 6px 25px 6px 8px;
+    }
+  
+    /* Status icon adjustments */
+    .package-comparator-wrapper .status-icon {
+      width: 24px;
+      height: 24px;
+      padding: 4px;
+    }
+  
+    /* Main padding adjustment */
+    .package-comparator-wrapper main {
+      padding: 0.5rem;
+    }
   }
-}
-
-@media screen and (max-width: 516px) {
-  .status-icon[data-tooltip]:before {
-    right: -10px;
+  
+  /* -- Small Devices -- */
+  @media screen and (max-width: 516px) {
+    /* Header adjustments */
+    .package-comparator-wrapper .header h1 {
+      font-size: 1.75rem;
+    }
+  
+    /* Package column adjustments */
+    .package-comparator-wrapper .package-column {
+      min-width: 120px;
+    }
+  
+    /* Content adjustments */
+    .package-comparator-wrapper .content-wrapper {
+      box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px,
+        rgb(209, 213, 219) 0px 0px 0px 1px inset;
+      border-radius: 30px;
+    }
+  
+    .package-comparator-wrapper .feature-wrapper {
+      box-shadow: none;
+    }
+  
+    .package-comparator-wrapper .status-wrapper {
+      box-shadow: none;
+    }
+  
+    .package-comparator-wrapper .feature-cell {
+      padding: 1rem 0.75rem;
+      font-size: 12px;
+      height: 44px;
+    }
+  
+    .package-comparator-wrapper .status-cell {
+      padding: 1rem 0.75rem;
+    }
+  
+    /* Toggle container adjustments */
+    .package-comparator-wrapper .toggle-container span {
+      font-size: 11px;
+    }
+  
+    /* Header select adjustments */
+    .package-comparator-wrapper .header-select {
+      font-size: 12px;
+      padding: 5px 20px 5px 6px;
+    }
   }
-}
+  
+  /* -- Very Small Devices -- */
+  @media screen and (max-width: 480px) {
+    .package-comparator-wrapper .feature-wrapper {
+      flex: 5;
+    }
+  
+    .package-comparator-wrapper .feature-cell {
+      padding: 1.5rem 0.75rem;
+    }
+  
+    .package-comparator-wrapper .status-cell {
+      padding: 1.5rem 0.75rem;
+    }
+  
+    .package-comparator-wrapper .comparison-header {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
 
-/* ==========================================================================
-   Mobile Touch Device Optimizations
-   ========================================================================== */
-@media (hover: none) {
-  .feature-cell {
-    /* Remove hover transition effects */
-    transition: none;
-    transform: none !important;
-  }
+    .package-comparator-wrapper .flex-container {
+      flex-direction: row;
+    }
 
-  .feature-cell:hover {
-    /* Disable color change and transform on hover */
-    color: var(--app-text) !important;
-    transform: none !important;
+    .package-comparator-wrapper .feature-header {
+      margin-bottom: 0;
+      align-content: center;
+    }
   }
-
-  /* Disable status icon animations */
-  .status-icon {
-    animation: none !important;
+  
+  /* ==========================================================================
+     Tooltips - Mobile & Tablet
+     ========================================================================== */
+  @media screen and (max-width: 1500px) {
+    .package-comparator-wrapper .status-icon[data-tooltip]:before {
+      transform-origin: right bottom;
+      left: auto;
+      right: -100px;
+      transform: translateY(10px);
+    }
+  
+    .package-comparator-wrapper .status-icon[data-tooltip]:after {
+      left: auto;
+      right: 4px;
+    }
+  
+    .package-comparator-wrapper .status-icon[data-tooltip]:hover:before {
+      transform: translateY(0);
+    }
+  
+    /* Override the default tooltip hover transform */
+    .package-comparator-wrapper .status-icon[data-tooltip]:hover:after,
+    .package-comparator-wrapper .status-icon[data-tooltip]:hover:before {
+      transform: translateY(0);
+    }
   }
-
-  .status-icon:hover {
-    transform: none !important;
-    animation: none !important;
+  
+  @media screen and (max-width: 980px) {
+    .package-comparator-wrapper .status-icon[data-tooltip]:before {
+      right: -50px;
+    }
   }
-}
-
-/* Additional fallback for older devices */
-@media screen and (max-width: 768px) {
-  .feature-cell {
-    transition: none;
-    transform: none !important;
+  
+  @media screen and (max-width: 768px) {
+    .package-comparator-wrapper .status-icon[data-tooltip]:before {
+      right: -20px;
+      min-width: 180px;
+      white-space: normal;
+    }
   }
-
-  .feature-cell:hover {
-    color: var(--app-text) !important;
-    transform: none !important;
+  
+  @media screen and (max-width: 516px) {
+    .package-comparator-wrapper .status-icon[data-tooltip]:before {
+      right: -10px;
+    }
   }
-
-  .status-icon {
-    animation: none !important;
+  
+  /* ==========================================================================
+     Mobile Touch Device Optimizations
+     ========================================================================== */
+  @media (hover: none) {
+    .package-comparator-wrapper .feature-cell {
+      /* Remove hover transition effects */
+      transition: none;
+      transform: none !important;
+    }
+  
+    .package-comparator-wrapper .feature-cell:hover {
+      /* Disable color change and transform on hover */
+      color: var(--app-text) !important;
+      transform: none !important;
+    }
+  
+    /* Disable status icon animations */
+    .package-comparator-wrapper .status-icon {
+      animation: none !important;
+    }
+  
+    .package-comparator-wrapper .status-icon:hover {
+      transform: none !important;
+      animation: none !important;
+    }
   }
-
-  .status-icon:hover {
-    transform: none !important;
-    animation: none !important;
-  }
-}
+  
+  /* Additional fallback for older devices */
+  @media screen and (max-width: 768px) {
+    .package-comparator-wrapper .feature-cell {
+      transition: none;
+      transform: none !important;
+    }
+  
+    .package-comparator-wrapper .feature-cell:hover {
+      color: var(--app-text) !important;
+      transform: none !important;
+    }
+  
+    .package-comparator-wrapper .status-icon {
+      animation: none !important;
+    }
+  
+    .package-comparator-wrapper .status-icon:hover {
+      transform: none !important;
+      animation: none !important;
+    }
+  }  

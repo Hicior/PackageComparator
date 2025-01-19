@@ -23,77 +23,79 @@ File: c:\Users\Wojciech Kuczkowski\OneDrive - Sławomir Mentzen\Pulpit\PackageCo
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
 </head>
 <body>
-  <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
-    <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 150" id="line">
-      <line x1="75" y1="34" x2="75" y2="58"/>
-    </symbol>
-    <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 150" id="circle">
-      <circle cx="75" cy="80" r="35"/>
-    </symbol>
-  </svg>
+  <div class="package-comparator-wrapper">
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+      <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 150" id="line">
+        <line x1="75" y1="34" x2="75" y2="58"/>
+      </symbol>
+      <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 150" id="circle">
+        <circle cx="75" cy="80" r="35"/>
+      </symbol>
+    </svg>
 
-  <!-- Header -->  
-  <header class="header">
-    <h1>Porównaj ze sobą dowolne pakiety</h1>
-  </header>
+    <!-- Header -->  
+    <div class="header">
+      <h1>Porównaj ze sobą dowolne pakiety</h1>
+    </div>
 
-  <!-- Comparison header --> 
-  <div class="comparison-header-wrapper">
-    <div id="comparison-header" class="comparison-header">
-      <div class="flex-container">
-        <div class="feature-header">Korzyści</div>
-        <div class="toggle-container">
-          <div class="power-switch">
-            <input type="checkbox" id="diffToggle" aria-label="Pokaż tylko różnice" />
-            <div class="button">
-              <svg class="power-off">
-                <use xlink:href="#line" class="line" />
-                <use xlink:href="#circle" class="circle" />
-              </svg>
-              <svg class="power-on">
-                <use xlink:href="#line" class="line" />
-                <use xlink:href="#circle" class="circle" />
-              </svg>
+    <!-- Comparison header --> 
+    <div class="comparison-header-wrapper">
+      <div id="comparison-header" class="comparison-header">
+        <div class="flex-container">
+          <div class="feature-header">Korzyści</div>
+          <div class="toggle-container">
+            <div class="power-switch">
+              <input type="checkbox" id="diffToggle" aria-label="Pokaż tylko różnice" />
+              <div class="button">
+                <svg class="power-off">
+                  <use xlink:href="#line" class="line" />
+                  <use xlink:href="#circle" class="circle" />
+                </svg>
+                <svg class="power-on">
+                  <use xlink:href="#line" class="line" />
+                  <use xlink:href="#circle" class="circle" />
+                </svg>
+              </div>
             </div>
+            <span>Pokaż tylko różnice</span>
           </div>
-          <span>Pokaż tylko różnice</span>
         </div>
-      </div>
-      <div class="package-column">
-        <select id="package1" class="header-select"></select>
-      </div>
-      <div class="package-column">
-        <select id="package2" class="header-select"></select>
+        <div class="package-column">
+          <select id="package1" class="header-select"></select>
+        </div>
+        <div class="package-column">
+          <select id="package2" class="header-select"></select>
+        </div>
       </div>
     </div>
-  </div>
 
-  <!-- Comparison app -->
-  <div class="comparison-app">
-    <main>
-      <div class="comparison-container">
-        <div id="comparisonBody" class="comparison-body">
-          <div class="content-wrapper">
-            <div class="feature-wrapper">
-              <div class="feature-cell">...</div>
-            </div>
-            <div class="status-wrapper">
-              <div class="status-cell">
-                <div class="status-icon">...</div>
+    <!-- Comparison app -->
+    <div class="comparison-app">
+      <main>
+        <div class="comparison-container">
+          <div id="comparisonBody" class="comparison-body">
+            <div class="content-wrapper">
+              <div class="feature-wrapper">
+                <div class="feature-cell">...</div>
               </div>
-            </div>
-            <div class="status-wrapper">
-              <div class="status-cell">
-                <div class="status-icon">...</div>
+              <div class="status-wrapper">
+                <div class="status-cell">
+                  <div class="status-icon">...</div>
+                </div>
+              </div>
+              <div class="status-wrapper">
+                <div class="status-cell">
+                  <div class="status-icon">...</div>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </main>
-  </div>
+      </main>
+    </div>
 
-  <script src="script.js"></script>
+    <script src="script.js"></script>
+  </div>
 </body>
 </html>
 
@@ -568,19 +570,13 @@ File: c:\Users\Wojciech Kuczkowski\OneDrive - Sławomir Mentzen\Pulpit\PackageCo
 /* ==========================================================================
    Base Styles
    ========================================================================== */
-body {
+.package-comparator-wrapper {
   margin: 0;
   padding: 0;
   background: var(--app-background);
   font-family: var(--Inter-font);
   color: var(--app-text);
-}
-
-* {
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-family: var(--Inter-font);
 }
 
 /* ==========================================================================

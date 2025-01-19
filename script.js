@@ -1,3 +1,4 @@
+"use strict";
 /* ==========================================================================
    Package Data Configuration
    ========================================================================== */
@@ -162,8 +163,8 @@ const packagesData = {
    ========================================================================== */
 // Create a unique set of all features across packages
 const allFeaturesSet = new Set();
-Object.values(packagesData).forEach((pkg) => {
-  pkg.forEach((f) => allFeaturesSet.add(f));
+Object.values(packagesData).forEach((currentPackage) => {
+  currentPackage.forEach((feature) => allFeaturesSet.add(feature));
 });
 const allFeatures = Array.from(allFeaturesSet);
 
@@ -173,80 +174,93 @@ const allFeatures = Array.from(allFeaturesSet);
 const packageSelect1 = document.getElementById("package1");
 const packageSelect2 = document.getElementById("package2");
 const comparisonBody = document.getElementById("comparisonBody");
+const diffToggle = document.getElementById("diffToggle");
 
 /* ==========================================================================
    Package Select Initialization
    ========================================================================== */
 const packageNames = Object.keys(packagesData);
 
-// Helper function to update dropdown options
+/**
+ * Updates the target dropdown options by excluding the current selection in the source dropdown.
+ * @param {HTMLSelectElement} sourceSelect - The dropdown whose selection is used as reference.
+ * @param {HTMLSelectElement} targetSelect - The dropdown to be updated.
+ * @param {boolean} skipValueUpdate - If true, skip setting the target's selected value.
+ */
 function updateDropdownOptions(sourceSelect, targetSelect, skipValueUpdate = false) {
-    const selectedValue = sourceSelect.value;
-    
-    // Store current selection of target dropdown
-    const currentTargetValue = targetSelect.value;
-    
-    // Clear and rebuild target dropdown options
-    targetSelect.innerHTML = '';
-    
-    packageNames.forEach(name => {
-        // Skip adding the option that's selected in the source dropdown
-        if (name !== selectedValue) {
-            const opt = document.createElement("option");
-            opt.value = name;
-            opt.innerText = name;
-            targetSelect.appendChild(opt);
-        }
-    });
-    
-    if (!skipValueUpdate) {
-        // If the previously selected value is still available, keep it selected
-        if (currentTargetValue !== selectedValue && packageNames.includes(currentTargetValue)) {
-            targetSelect.value = currentTargetValue;
-        } else {
-            // Otherwise, select the first available option
-            targetSelect.value = targetSelect.options[0].value;
-        }
+  const selectedValue = sourceSelect.value;
+  const currentTargetValue = targetSelect.value;
+
+  // Clear target dropdown
+  targetSelect.innerHTML = "";
+
+  // Rebuild options without the one selected in sourceSelect
+  packageNames.forEach((name) => {
+    if (name !== selectedValue) {
+      const opt = document.createElement("option");
+      opt.value = name;
+      opt.innerText = name;
+      targetSelect.appendChild(opt);
     }
+  });
+
+  // Control the target's selected value
+  if (!skipValueUpdate) {
+    if (currentTargetValue !== selectedValue && packageNames.includes(currentTargetValue)) {
+      targetSelect.value = currentTargetValue;
+    } else {
+      targetSelect.value = targetSelect.options[0].value;
+    }
+  }
 }
 
-// Initialize both dropdowns with all options
-packageNames.forEach(name => {
+/**
+ * Populates both dropdowns initially and sets default values.
+ */
+function populateDropdowns() {
+  packageNames.forEach((name) => {
     // Add to first dropdown
     const opt1 = document.createElement("option");
     opt1.value = name;
     opt1.innerText = name;
     packageSelect1.appendChild(opt1);
-    
+
     // Add to second dropdown
     const opt2 = document.createElement("option");
     opt2.value = name;
     opt2.innerText = name;
     packageSelect2.appendChild(opt2);
-});
+  });
 
-// Set initial values
-packageSelect1.value = packageNames[0]; // PRIME
-packageSelect2.value = "Mentzen+ IT Podstawowy";
+  // Set initial values
+  packageSelect1.value = packageNames[0]; // e.g., "PRIME"
+  packageSelect2.value = "Mentzen+ IT Podstawowy";
 
-// Update dropdowns based on initial selections
-updateDropdownOptions(packageSelect2, packageSelect1);
-updateDropdownOptions(packageSelect1, packageSelect2);
+  // Update each dropdown so they don't show the same value as the other
+  updateDropdownOptions(packageSelect2, packageSelect1);
+  updateDropdownOptions(packageSelect1, packageSelect2);
+}
 
 /* ==========================================================================
    Status Icon Creation
    ========================================================================== */
-function createStatusIcon(status, feature, packageName) {
+/**
+ * Creates a status icon (checkmark or cross) or a tooltip icon depending on the feature and package.
+ * @param {string} featureStatus - "Yes" or "No" indicating if the package has the feature.
+ * @param {string} feature - Name of the feature.
+ * @param {string} packageName - Name of the package.
+ * @returns {HTMLDivElement} A DOM element representing the icon.
+ */
+function createStatusIcon(featureStatus, feature, packageName) {
   const icon = document.createElement("div");
   icon.className = "status-icon";
 
   // Package-specific tooltip configurations
   const packageSpecificTooltips = {
-    "Po roku nieprzerwanej współpracy możliwość skorzystania z bezpłatnych usług prawnych":
-      {
-        "Mentzen+ Prawo": "2h darmowych usług prawnych",
-        "Mentzen+ Prawo i Podatki": "4h darmowych usług prawnych",
-      },
+    "Po roku nieprzerwanej współpracy możliwość skorzystania z bezpłatnych usług prawnych": {
+      "Mentzen+ Prawo": "2h darmowych usług prawnych",
+      "Mentzen+ Prawo i Podatki": "4h darmowych usług prawnych",
+    },
   };
 
   // Feature-specific tooltip configurations
@@ -264,40 +278,35 @@ function createStatusIcon(status, feature, packageName) {
 
   // Package categories for conditional tooltips
   const accountingPackages = ["Mentzen+ IT Podstawowy", "Mentzen+ IT Ryczałt"];
-  const itPackages = [
-    "Mentzen+ IT Podstawowy",
-    "Mentzen+ IT Średni",
-    "Mentzen+ IT Premium",
-  ];
+  const itPackages = ["Mentzen+ IT Podstawowy", "Mentzen+ IT Średni", "Mentzen+ IT Premium"];
 
-  // Handle package-specific tooltips
+  // Handle package-specific tooltip
   if (
     feature in packageSpecificTooltips &&
     packageName in packageSpecificTooltips[feature]
   ) {
-    icon.innerHTML = `<svg width="15" height="15" viewBox="0 0 14 14" fill="none">
-      <text x="7" y="11" text-anchor="middle" fill="#0F766E" style="font-size: 14px; font-weight: 700;">?</text>
-    </svg>`;
-    icon.setAttribute(
-      "data-tooltip",
-      packageSpecificTooltips[feature][packageName]
-    );
+    icon.innerHTML = `
+      <svg width="15" height="15" viewBox="0 0 14 14" fill="none">
+        <text x="7" y="11" text-anchor="middle" fill="#0F766E" style="font-size: 14px; font-weight: 700;">?</text>
+      </svg>`;
+    icon.setAttribute("data-tooltip", packageSpecificTooltips[feature][packageName]);
     icon.style.cursor = "help";
     return icon;
   }
 
   // Handle feature-specific tooltips
   if (feature in featuresWithTooltips) {
-    const shouldShowTooltip =
+    const requiresTooltip =
       feature ===
       "Wsparcie w postępowaniach przed organami podatkowymi oraz sądami administracyjnymi, w tym przed Naczelnym Sądem Administracyjnym"
         ? itPackages.includes(packageName)
         : accountingPackages.includes(packageName);
 
-    if (shouldShowTooltip) {
-      icon.innerHTML = `<svg width="15" height="15" viewBox="0 0 14 14" fill="none">
-        <text x="7" y="11" text-anchor="middle" fill="#0F766E" style="font-size: 14px; font-weight: 700;">?</text>
-      </svg>`;
+    if (requiresTooltip) {
+      icon.innerHTML = `
+        <svg width="15" height="15" viewBox="0 0 14 14" fill="none">
+          <text x="7" y="11" text-anchor="middle" fill="#0F766E" style="font-size: 14px; font-weight: 700;">?</text>
+        </svg>`;
       icon.setAttribute("data-tooltip", featuresWithTooltips[feature]);
       icon.style.cursor = "help";
       return icon;
@@ -306,19 +315,18 @@ function createStatusIcon(status, feature, packageName) {
 
   // Create standard yes/no icons
   icon.setAttribute("role", "img");
-  icon.setAttribute(
-    "aria-label",
-    status === "Yes" ? "Included" : "Not included"
-  );
+  icon.setAttribute("aria-label", featureStatus === "Yes" ? "Included" : "Not included");
 
-  if (status === "Yes") {
-    icon.innerHTML = `<svg width="15" height="15" viewBox="0 0 14 14" fill="none">
-      <path d="M11.6667 3.5L5.25 9.91667L2.33333 7" stroke="#0F766E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>`;
+  if (featureStatus === "Yes") {
+    icon.innerHTML = `
+      <svg width="15" height="15" viewBox="0 0 14 14" fill="none">
+        <path d="M11.6667 3.5L5.25 9.91667L2.33333 7" stroke="#0F766E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>`;
   } else {
-    icon.innerHTML = `<svg width="15" height="15" viewBox="0 0 14 14" fill="none">
-      <path d="M10.5 3.5L3.5 10.5M3.5 3.5L10.5 10.5" stroke="#B91C1C" stroke-width="2" stroke-linecap="round"/>
-    </svg>`;
+    icon.innerHTML = `
+      <svg width="15" height="15" viewBox="0 0 14 14" fill="none">
+        <path d="M10.5 3.5L3.5 10.5M3.5 3.5L10.5 10.5" stroke="#B91C1C" stroke-width="2" stroke-linecap="round"/>
+      </svg>`;
   }
   return icon;
 }
@@ -326,13 +334,17 @@ function createStatusIcon(status, feature, packageName) {
 /* ==========================================================================
    Comparison Rendering
    ========================================================================== */
+/**
+ * Renders the comparison based on selected packages and toggle state.
+ */
 function renderComparison() {
-  const p1 = packageSelect1.value;
-  const p2 = packageSelect2.value;
-  const showOnlyDiff = document.getElementById("diffToggle").checked;
+  const selectedPackage1 = packageSelect1.value;
+  const selectedPackage2 = packageSelect2.value;
+  const showOnlyDifferences = diffToggle.checked;
+
   comparisonBody.innerHTML = "";
 
-  // Create main structure
+  // Main container structure
   const contentWrapper = document.createElement("div");
   contentWrapper.className = "content-wrapper";
 
@@ -345,92 +357,92 @@ function renderComparison() {
   const statusWrapper2 = document.createElement("div");
   statusWrapper2.className = "status-wrapper";
 
-  // Assemble DOM structure
+  // Assemble containers
   contentWrapper.appendChild(featureWrapper);
   contentWrapper.appendChild(statusWrapper1);
   contentWrapper.appendChild(statusWrapper2);
   comparisonBody.appendChild(contentWrapper);
 
-  // Render features and their statuses
+  // Loop through all features to build rows
   allFeatures.forEach((feature, index) => {
-    const hasP1 = packagesData[p1].includes(feature) ? "Yes" : "No";
-    const hasP2 = packagesData[p2].includes(feature) ? "Yes" : "No";
+    const package1HasFeature = packagesData[selectedPackage1].includes(feature) ? "Yes" : "No";
+    const package2HasFeature = packagesData[selectedPackage2].includes(feature) ? "Yes" : "No";
 
-    if (hasP1 === "Yes" || hasP2 === "Yes") {
-      if (showOnlyDiff && hasP1 === hasP2) return;
+    // If both packages don't have the feature, skip it entirely
+    if (package1HasFeature === "No" && package2HasFeature === "No") return;
 
-      // Create feature cell with hover effects
-      const featureCell = document.createElement("div");
-      featureCell.className = "feature-cell";
-      featureCell.setAttribute("data-feature", `feature-${index}`);
+    // If "Show Only Differences" is on, skip identical rows
+    if (showOnlyDifferences && package1HasFeature === package2HasFeature) return;
 
-      featureCell.addEventListener("mouseenter", () => {
-        document
-          .querySelectorAll(`[data-feature="feature-${index}"] .status-icon`)
-          .forEach((icon) => {
-            icon.style.animation = "scaleUp 0.2s ease forwards";
-          });
-        featureCell.style.color = "black";
-        featureCell.style.transform = "translateX(5px)";
-      });
+    // Create feature cell
+    const featureCell = document.createElement("div");
+    featureCell.className = "feature-cell";
+    featureCell.setAttribute("data-feature", `feature-${index}`);
 
-      featureCell.addEventListener("mouseleave", () => {
-        document
-          .querySelectorAll(`[data-feature="feature-${index}"] .status-icon`)
-          .forEach((icon) => {
-            icon.style.animation = "scaleUp 0.2s ease reverse forwards";
-          });
-        featureCell.style.color = "";
-        featureCell.style.transform = "translateX(0)";
-      });
+    // Hover effect for feature cell
+    featureCell.addEventListener("mouseenter", () => {
+      document
+        .querySelectorAll(`[data-feature="feature-${index}"] .status-icon`)
+        .forEach((icon) => {
+          icon.style.animation = "scaleUp 0.2s ease forwards";
+        });
+      featureCell.style.color = "black";
+      featureCell.style.transform = "translateX(5px)";
+    });
 
-      // Add vertical line and feature text
-      const verticalLine = document.createElement("span");
-      verticalLine.className = "vertical-line";
-      featureCell.appendChild(verticalLine);
+    featureCell.addEventListener("mouseleave", () => {
+      document
+        .querySelectorAll(`[data-feature="feature-${index}"] .status-icon`)
+        .forEach((icon) => {
+          icon.style.animation = "scaleUp 0.2s ease reverse forwards";
+        });
+      featureCell.style.color = "";
+      featureCell.style.transform = "translateX(0)";
+    });
 
-      const featureText = document.createTextNode(feature);
-      featureCell.appendChild(featureText);
-      featureWrapper.appendChild(featureCell);
+    // Vertical line in feature cell
+    const verticalLine = document.createElement("span");
+    verticalLine.className = "vertical-line";
+    featureCell.appendChild(verticalLine);
 
-      // Create status cells for both packages
-      const statusCell1 = document.createElement("div");
-      statusCell1.className = `status-cell ${
-        hasP1 === "Yes" ? "status-yes" : "status-no"
-      }`;
-      statusCell1.setAttribute("data-label", p1);
-      statusCell1.setAttribute("data-feature", `feature-${index}`);
-      statusCell1.appendChild(createStatusIcon(hasP1, feature, p1));
-      statusWrapper1.appendChild(statusCell1);
+    // Feature text
+    const featureText = document.createTextNode(feature);
+    featureCell.appendChild(featureText);
+    featureWrapper.appendChild(featureCell);
 
-      const statusCell2 = document.createElement("div");
-      statusCell2.className = `status-cell ${
-        hasP2 === "Yes" ? "status-yes" : "status-no"
-      }`;
-      statusCell2.setAttribute("data-label", p2);
-      statusCell2.setAttribute("data-feature", `feature-${index}`);
-      statusCell2.appendChild(createStatusIcon(hasP2, feature, p2));
-      statusWrapper2.appendChild(statusCell2);
-    }
+    // Status cell for Package 1
+    const statusCell1 = document.createElement("div");
+    statusCell1.className = `status-cell ${package1HasFeature === "Yes" ? "status-yes" : "status-no"}`;
+    statusCell1.setAttribute("data-label", selectedPackage1);
+    statusCell1.setAttribute("data-feature", `feature-${index}`);
+    statusCell1.appendChild(createStatusIcon(package1HasFeature, feature, selectedPackage1));
+    statusWrapper1.appendChild(statusCell1);
+
+    // Status cell for Package 2
+    const statusCell2 = document.createElement("div");
+    statusCell2.className = `status-cell ${package2HasFeature === "Yes" ? "status-yes" : "status-no"}`;
+    statusCell2.setAttribute("data-label", selectedPackage2);
+    statusCell2.setAttribute("data-feature", `feature-${index}`);
+    statusCell2.appendChild(createStatusIcon(package2HasFeature, feature, selectedPackage2));
+    statusWrapper2.appendChild(statusCell2);
   });
 }
 
 /* ==========================================================================
-   Event Listeners
+   Event Listeners & Initialization
    ========================================================================== */
-// Update event listeners
 packageSelect1.addEventListener("change", () => {
-    updateDropdownOptions(packageSelect1, packageSelect2);
-    renderComparison();
+  updateDropdownOptions(packageSelect1, packageSelect2);
+  renderComparison();
 });
 
 packageSelect2.addEventListener("change", () => {
-    updateDropdownOptions(packageSelect2, packageSelect1);
-    renderComparison();
+  updateDropdownOptions(packageSelect2, packageSelect1);
+  renderComparison();
 });
 
-const diffToggle = document.getElementById("diffToggle");
 diffToggle.addEventListener("change", renderComparison);
 
-// Initial render
+// Initial setup
+populateDropdowns();
 renderComparison();
