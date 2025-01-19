@@ -10,7 +10,7 @@ FILE CONTENTS:
 ================================================================================
 
 ================================================================================
-File: c:\Users\Nagrywanie\OneDrive - Sławomir Mentzen\Pulpit\PackageComparator\index.html
+File: c:\Users\Wojciech Kuczkowski\OneDrive - Sławomir Mentzen\Pulpit\PackageComparator\index.html
 ================================================================================
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -31,39 +31,43 @@ File: c:\Users\Nagrywanie\OneDrive - Sławomir Mentzen\Pulpit\PackageComparator\
       <circle cx="75" cy="80" r="35"/>
     </symbol>
   </svg>
+
   <!-- Header -->  
   <header class="header">
     <h1>Porównaj ze sobą dowolne pakiety</h1>
   </header>
+
   <!-- Comparison header --> 
-  <div id="comparison-header" class="comparison-header">
-    <div class="flex-container">
-      <div class="feature-header">Korzyści</div>
-      <div class="toggle-container">
-        <div class="power-switch">
-          <input type="checkbox" id="diffToggle" aria-label="Pokaż tylko różnice" />
-          <div class="button">
-            <svg class="power-off">
-              <use xlink:href="#line" class="line" />
-              <use xlink:href="#circle" class="circle" />
-            </svg>
-            <svg class="power-on">
-              <use xlink:href="#line" class="line" />
-              <use xlink:href="#circle" class="circle" />
-            </svg>
+  <div class="comparison-header-wrapper">
+    <div id="comparison-header" class="comparison-header">
+      <div class="flex-container">
+        <div class="feature-header">Korzyści</div>
+        <div class="toggle-container">
+          <div class="power-switch">
+            <input type="checkbox" id="diffToggle" aria-label="Pokaż tylko różnice" />
+            <div class="button">
+              <svg class="power-off">
+                <use xlink:href="#line" class="line" />
+                <use xlink:href="#circle" class="circle" />
+              </svg>
+              <svg class="power-on">
+                <use xlink:href="#line" class="line" />
+                <use xlink:href="#circle" class="circle" />
+              </svg>
+            </div>
           </div>
+          <span>Pokaż tylko różnice</span>
         </div>
-        <span>Pokaż tylko różnice</span>
       </div>
-      
-    </div>
-    <div class="package-column">
-      <select id="package1" class="header-select"></select>
-    </div>
-    <div class="package-column">
-      <select id="package2" class="header-select"></select>
+      <div class="package-column">
+        <select id="package1" class="header-select"></select>
+      </div>
+      <div class="package-column">
+        <select id="package2" class="header-select"></select>
+      </div>
     </div>
   </div>
+
   <!-- Comparison app -->
   <div class="comparison-app">
     <main>
@@ -90,14 +94,16 @@ File: c:\Users\Nagrywanie\OneDrive - Sławomir Mentzen\Pulpit\PackageComparator\
   </div>
 
   <script src="script.js"></script>
-
 </body>
 </html>
 
 
 ================================================================================
-File: c:\Users\Nagrywanie\OneDrive - Sławomir Mentzen\Pulpit\PackageComparator\script.js
+File: c:\Users\Wojciech Kuczkowski\OneDrive - Sławomir Mentzen\Pulpit\PackageComparator\script.js
 ================================================================================
+/* ==========================================================================
+   Package Data Configuration
+   ========================================================================== */
 const packagesData = {
   PRIME: [
     "Prowadzenie księgowości",
@@ -111,7 +117,6 @@ const packagesData = {
     "Dostęp do webinarów",
     "Preferencyjna cena za pozostałe usługi Usługodawcy",
   ],
-
   "Mentzen+ IT Podstawowy": [
     "Nielimitowane konsultacje podatkowe",
     "Analiza podatkowa raz w roku kalendarzowym",
@@ -137,10 +142,9 @@ const packagesData = {
     "Opracowania do materiałów publikowanych na YouTube",
     "Preferencyjna cena za pozostałe usługi Usługodawcy",
   ],
-
   "Mentzen+ IT Ryczałt": [
     "Nielimitowane konsultacje podatkowe",
-    "Analiza podatkowa raz w roku",
+    "Analiza podatkowa raz w roku kalendarzowym",
     "Wsparcie w procesie IP BOX",
     "Wniosek o wydanie interpretacji indywidualnej w zakresie ulgi IP BOX oraz zastosowanie stawek 12% oraz 8,5% ryczałtu",
     "Wnioski do GUS",
@@ -160,16 +164,16 @@ const packagesData = {
     "Opracowania do materiałów publikowanych na YouTube",
     "Preferencyjna cena za pozostałe usługi Usługodawcy",
   ],
-
   "Mentzen+ IT Średni": [
     "Nielimitowane konsultacje podatkowe",
-    "Analiza podatkowa raz w roku",
+    "Analiza podatkowa raz w roku kalendarzowym",
     "Nielimitowane konsultacje prawne",
     "Wsparcie w procesie IP BOX",
     "Wniosek o wydanie interpretacji indywidualnej w zakresie ulgi IP BOX oraz zastosowanie stawek 12% oraz 8,5% ryczałtu",
     "Wsparcie w kontrolach podatkowych",
     "Wsparcie w postępowaniach przed organami podatkowymi oraz sądami administracyjnymi, w tym przed Naczelnym Sądem Administracyjnym",
     "Przygotowywanie bieżącej ewidencji na potrzeby rozliczenia ulgi IP Box",
+    "Uproszczony audyt KPIR",
     "Wnioski do GUS",
     "Zakładanie JDG",
     "Zakładanie spółek przez system S24",
@@ -182,10 +186,9 @@ const packagesData = {
     "Opracowania do materiałów publikowanych na YouTube",
     "Preferencyjna cena za pozostałe usługi Usługodawcy",
   ],
-
   "Mentzen+ IT Premium": [
     "Nielimitowane konsultacje podatkowe",
-    "Analiza podatkowa raz w roku",
+    "Analiza podatkowa raz w roku kalendarzowym",
     "Nielimitowane konsultacje prawne",
     "Wsparcie w procesie IP BOX",
     "Wniosek o wydanie interpretacji indywidualnej w zakresie ulgi IP BOX oraz zastosowanie stawek 12% oraz 8,5% ryczałtu",
@@ -208,7 +211,6 @@ const packagesData = {
     "Preferencyjna cena za pozostałe usługi Usługodawcy",
     "Dostęp do wzorów uchwał i innych dokumentów korporacyjnych opracowanych przez Kancelarię",
   ],
-
   "Mentzen+ Prawo i Podatki": [
     "Nielimitowane konsultacje podatkowe",
     "Nielimitowane konsultacje prawne",
@@ -231,7 +233,6 @@ const packagesData = {
     "Po roku nieprzerwanej współpracy możliwość skorzystania z bezpłatnych usług prawnych",
     "Opracowania do materiałów publikowanych na YouTube",
   ],
-
   "Mentzen+ Prawo": [
     "Nielimitowane konsultacje prawne",
     "Przygotowanie raz w miesiącu wezwania do zapłaty",
@@ -246,7 +247,6 @@ const packagesData = {
     "Po roku nieprzerwanej współpracy możliwość skorzystania z bezpłatnych usług prawnych",
     "Preferencyjna cena za pozostałe usługi Usługodawcy",
   ],
-
   "Mentzen+ Podatki": [
     "Nielimitowane konsultacje podatkowe",
     "Analiza podatkowa",
@@ -260,37 +260,90 @@ const packagesData = {
   ],
 };
 
+/* ==========================================================================
+   Feature Management
+   ========================================================================== */
+// Create a unique set of all features across packages
 const allFeaturesSet = new Set();
-Object.values(packagesData).forEach((pkg) =>
-  pkg.forEach((f) => allFeaturesSet.add(f))
-);
+Object.values(packagesData).forEach((pkg) => {
+  pkg.forEach((f) => allFeaturesSet.add(f));
+});
 const allFeatures = Array.from(allFeaturesSet);
 
+/* ==========================================================================
+   DOM Elements
+   ========================================================================== */
 const packageSelect1 = document.getElementById("package1");
 const packageSelect2 = document.getElementById("package2");
 const comparisonBody = document.getElementById("comparisonBody");
 
+/* ==========================================================================
+   Package Select Initialization
+   ========================================================================== */
 const packageNames = Object.keys(packagesData);
-packageNames.forEach((name) => {
-  const opt1 = document.createElement("option");
-  opt1.value = name;
-  opt1.innerText = name;
-  packageSelect1.appendChild(opt1);
 
-  const opt2 = document.createElement("option");
-  opt2.value = name;
-  opt2.innerText = name;
-  packageSelect2.appendChild(opt2);
+// Helper function to update dropdown options
+function updateDropdownOptions(sourceSelect, targetSelect, skipValueUpdate = false) {
+    const selectedValue = sourceSelect.value;
+    
+    // Store current selection of target dropdown
+    const currentTargetValue = targetSelect.value;
+    
+    // Clear and rebuild target dropdown options
+    targetSelect.innerHTML = '';
+    
+    packageNames.forEach(name => {
+        // Skip adding the option that's selected in the source dropdown
+        if (name !== selectedValue) {
+            const opt = document.createElement("option");
+            opt.value = name;
+            opt.innerText = name;
+            targetSelect.appendChild(opt);
+        }
+    });
+    
+    if (!skipValueUpdate) {
+        // If the previously selected value is still available, keep it selected
+        if (currentTargetValue !== selectedValue && packageNames.includes(currentTargetValue)) {
+            targetSelect.value = currentTargetValue;
+        } else {
+            // Otherwise, select the first available option
+            targetSelect.value = targetSelect.options[0].value;
+        }
+    }
+}
+
+// Initialize both dropdowns with all options
+packageNames.forEach(name => {
+    // Add to first dropdown
+    const opt1 = document.createElement("option");
+    opt1.value = name;
+    opt1.innerText = name;
+    packageSelect1.appendChild(opt1);
+    
+    // Add to second dropdown
+    const opt2 = document.createElement("option");
+    opt2.value = name;
+    opt2.innerText = name;
+    packageSelect2.appendChild(opt2);
 });
 
-packageSelect1.value = packageNames[0];
-packageSelect2.value = packageNames[1];
+// Set initial values
+packageSelect1.value = packageNames[0]; // PRIME
+packageSelect2.value = "Mentzen+ IT Podstawowy";
 
+// Update dropdowns based on initial selections
+updateDropdownOptions(packageSelect2, packageSelect1);
+updateDropdownOptions(packageSelect1, packageSelect2);
+
+/* ==========================================================================
+   Status Icon Creation
+   ========================================================================== */
 function createStatusIcon(status, feature, packageName) {
   const icon = document.createElement("div");
   icon.className = "status-icon";
 
-  // Features with package-specific tooltips
+  // Package-specific tooltip configurations
   const packageSpecificTooltips = {
     "Po roku nieprzerwanej współpracy możliwość skorzystania z bezpłatnych usług prawnych":
       {
@@ -299,7 +352,7 @@ function createStatusIcon(status, feature, packageName) {
       },
   };
 
-  // Standard features with tooltips
+  // Feature-specific tooltip configurations
   const featuresWithTooltips = {
     "Prowadzenie księgowości": "do 10 lub 30 dok. miesięcznie",
     "Dostęp do platformy umożliwiającej przekazywanie dokumentów":
@@ -312,7 +365,7 @@ function createStatusIcon(status, feature, packageName) {
       "dla osób, które korzystały z naszego wsparcia w zakresie uzyskania i rozliczenia ulgi",
   };
 
-  // Package groups for different tooltip conditions
+  // Package categories for conditional tooltips
   const accountingPackages = ["Mentzen+ IT Podstawowy", "Mentzen+ IT Ryczałt"];
   const itPackages = [
     "Mentzen+ IT Podstawowy",
@@ -320,7 +373,7 @@ function createStatusIcon(status, feature, packageName) {
     "Mentzen+ IT Premium",
   ];
 
-  // Check for package-specific tooltips first
+  // Handle package-specific tooltips
   if (
     feature in packageSpecificTooltips &&
     packageName in packageSpecificTooltips[feature]
@@ -328,7 +381,6 @@ function createStatusIcon(status, feature, packageName) {
     icon.innerHTML = `<svg width="15" height="15" viewBox="0 0 14 14" fill="none">
       <text x="7" y="11" text-anchor="middle" fill="#0F766E" style="font-size: 14px; font-weight: 700;">?</text>
     </svg>`;
-
     icon.setAttribute(
       "data-tooltip",
       packageSpecificTooltips[feature][packageName]
@@ -337,7 +389,7 @@ function createStatusIcon(status, feature, packageName) {
     return icon;
   }
 
-  // Check for standard tooltips
+  // Handle feature-specific tooltips
   if (feature in featuresWithTooltips) {
     const shouldShowTooltip =
       feature ===
@@ -349,14 +401,13 @@ function createStatusIcon(status, feature, packageName) {
       icon.innerHTML = `<svg width="15" height="15" viewBox="0 0 14 14" fill="none">
         <text x="7" y="11" text-anchor="middle" fill="#0F766E" style="font-size: 14px; font-weight: 700;">?</text>
       </svg>`;
-
       icon.setAttribute("data-tooltip", featuresWithTooltips[feature]);
       icon.style.cursor = "help";
       return icon;
     }
   }
 
-  // Standard icon creation for non-tooltip cases
+  // Create standard yes/no icons
   icon.setAttribute("role", "img");
   icon.setAttribute(
     "aria-label",
@@ -372,21 +423,22 @@ function createStatusIcon(status, feature, packageName) {
       <path d="M10.5 3.5L3.5 10.5M3.5 3.5L10.5 10.5" stroke="#B91C1C" stroke-width="2" stroke-linecap="round"/>
     </svg>`;
   }
-
   return icon;
 }
 
+/* ==========================================================================
+   Comparison Rendering
+   ========================================================================== */
 function renderComparison() {
   const p1 = packageSelect1.value;
   const p2 = packageSelect2.value;
   const showOnlyDiff = document.getElementById("diffToggle").checked;
   comparisonBody.innerHTML = "";
 
-  // Create content wrapper
+  // Create main structure
   const contentWrapper = document.createElement("div");
   contentWrapper.className = "content-wrapper";
 
-  // Create column wrappers
   const featureWrapper = document.createElement("div");
   featureWrapper.className = "feature-wrapper";
 
@@ -396,12 +448,13 @@ function renderComparison() {
   const statusWrapper2 = document.createElement("div");
   statusWrapper2.className = "status-wrapper";
 
-  // Append column wrappers to content wrapper
+  // Assemble DOM structure
   contentWrapper.appendChild(featureWrapper);
   contentWrapper.appendChild(statusWrapper1);
   contentWrapper.appendChild(statusWrapper2);
   comparisonBody.appendChild(contentWrapper);
 
+  // Render features and their statuses
   allFeatures.forEach((feature, index) => {
     const hasP1 = packagesData[p1].includes(feature) ? "Yes" : "No";
     const hasP2 = packagesData[p2].includes(feature) ? "Yes" : "No";
@@ -409,11 +462,11 @@ function renderComparison() {
     if (hasP1 === "Yes" || hasP2 === "Yes") {
       if (showOnlyDiff && hasP1 === hasP2) return;
 
+      // Create feature cell with hover effects
       const featureCell = document.createElement("div");
       featureCell.className = "feature-cell";
       featureCell.setAttribute("data-feature", `feature-${index}`);
 
-      // Add mouse enter/leave events
       featureCell.addEventListener("mouseenter", () => {
         document
           .querySelectorAll(`[data-feature="feature-${index}"] .status-icon`)
@@ -434,6 +487,7 @@ function renderComparison() {
         featureCell.style.transform = "translateX(0)";
       });
 
+      // Add vertical line and feature text
       const verticalLine = document.createElement("span");
       verticalLine.className = "vertical-line";
       featureCell.appendChild(verticalLine);
@@ -442,6 +496,7 @@ function renderComparison() {
       featureCell.appendChild(featureText);
       featureWrapper.appendChild(featureCell);
 
+      // Create status cells for both packages
       const statusCell1 = document.createElement("div");
       statusCell1.className = `status-cell ${
         hasP1 === "Yes" ? "status-yes" : "status-no"
@@ -463,17 +518,33 @@ function renderComparison() {
   });
 }
 
+/* ==========================================================================
+   Event Listeners
+   ========================================================================== */
+// Update event listeners
+packageSelect1.addEventListener("change", () => {
+    updateDropdownOptions(packageSelect1, packageSelect2);
+    renderComparison();
+});
+
+packageSelect2.addEventListener("change", () => {
+    updateDropdownOptions(packageSelect2, packageSelect1);
+    renderComparison();
+});
+
 const diffToggle = document.getElementById("diffToggle");
 diffToggle.addEventListener("change", renderComparison);
 
-packageSelect1.addEventListener("change", renderComparison);
-packageSelect2.addEventListener("change", renderComparison);
+// Initial render
 renderComparison();
 
 
 ================================================================================
-File: c:\Users\Nagrywanie\OneDrive - Sławomir Mentzen\Pulpit\PackageComparator\style.css
+File: c:\Users\Wojciech Kuczkowski\OneDrive - Sławomir Mentzen\Pulpit\PackageComparator\style.css
 ================================================================================
+/* ==========================================================================
+   CSS Variables & Root Settings
+   ========================================================================== */
 :root {
   --app-dark-blue: #0e2334;
   --app-medium-dark-blue: #1b374d;
@@ -494,7 +565,9 @@ File: c:\Users\Nagrywanie\OneDrive - Sławomir Mentzen\Pulpit\PackageComparator\
   --Inter-font: "Inter", sans-serif;
 }
 
-/* Base Styles */
+/* ==========================================================================
+   Base Styles
+   ========================================================================== */
 body {
   margin: 0;
   padding: 0;
@@ -510,7 +583,9 @@ body {
   font-family: var(--Inter-font);
 }
 
-/* Layout Components */
+/* ==========================================================================
+   Layout Components
+   ========================================================================== */
 .comparison-app {
   display: flex;
   flex-direction: column;
@@ -524,7 +599,7 @@ main {
   padding: 2rem;
 }
 
-/* Header Components */
+/* Header Styles */
 .header {
   padding: 8rem 2rem 4rem 2rem;
   text-align: center;
@@ -537,23 +612,31 @@ main {
   margin: 0 auto;
 }
 
-/* Comparison Container Styles */
+/* ==========================================================================
+   Comparison Components
+   ========================================================================== */
 .comparison-container {
   width: 100%;
   max-width: 1060px;
   position: relative;
 }
 
-/* Comparison Header Styles */
-.comparison-header {
+/* Comparison Header */
+.comparison-header-wrapper {
   position: sticky;
   top: 5px;
   z-index: 10;
   display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 2rem;
+}
+
+.comparison-header {
+  display: flex;
   padding: 1rem;
   max-width: 1060px;
   width: 100%;
-  margin: 0px auto;
   background: var(--app-dark-blue);
   border-radius: 30px;
 }
@@ -562,6 +645,7 @@ main {
   padding: 0 0.4rem;
 }
 
+/* Comparison Layout */
 .flex-container {
   padding-left: 1.5rem;
   flex: 2;
@@ -585,13 +669,14 @@ main {
   align-content: center;
 }
 
-/* Comparison Body Styles */
+/* ==========================================================================
+   Content Grid
+   ========================================================================== */
 .comparison-body {
   display: flex;
   width: 100%;
 }
 
-/* Columns styles */
 .content-wrapper {
   display: flex;
   width: 100%;
@@ -616,18 +701,7 @@ main {
   border-radius: 30px;
 }
 
-@media (max-width: 700px) {
-  .content-wrapper {
-    flex-direction: column;
-  }
-
-  .feature-wrapper,
-  .status-wrapper {
-    width: 100%;
-  }
-}
-
-/* Cell Styles */
+/* Grid Cells */
 .feature-cell {
   flex: 2;
   padding: 1.5rem 2rem 1.5rem 2rem;
@@ -639,14 +713,6 @@ main {
   transform: translateX(0);
 }
 
-.vertical-line {
-  display: inline-block;
-  min-width: 3px;
-  height: 100%;
-  background-color: var(--app-dark-blue);
-  margin-right: 10px;
-}
-
 .status-cell {
   flex: 1;
   padding: 1.5rem 2rem 1.5rem 2rem;
@@ -655,6 +721,18 @@ main {
   align-items: center;
   color: var(--app-text);
   font-weight: 500;
+}
+
+/* ==========================================================================
+   UI Components
+   ========================================================================== */
+/* Vertical Line Separator */
+.vertical-line {
+  display: inline-block;
+  min-width: 3px;
+  height: 100%;
+  background-color: var(--app-dark-blue);
+  margin-right: 10px;
 }
 
 /* Status Icons */
@@ -668,61 +746,7 @@ main {
   justify-content: center;
 }
 
-.status-icon[data-tooltip] {
-  position: relative;
-}
-
-.status-icon[data-tooltip]:before,
-.status-icon[data-tooltip]:after {
-  position: absolute;
-  visibility: hidden;
-  opacity: 0;
-  transition: transform 200ms ease, opacity 200ms;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-  z-index: 99;
-}
-
-.status-icon[data-tooltip]:before {
-  content: attr(data-tooltip);
-  background: var(--app-dark-blue);
-  color: var(--app-white);
-  font-size: 12px;
-  font-weight: bold;
-  padding: 8px 12px;
-  border-radius: 4px;
-  white-space: nowrap;
-  text-decoration: none;
-  letter-spacing: 0.5px;
-  bottom: 100%;
-  left: 50%;
-  transform: translateX(-50%) translateY(10px);
-  margin-bottom: 10px;
-}
-
-.status-icon[data-tooltip]:after {
-  width: 0;
-  height: 0;
-  border: 6px solid transparent;
-  content: "";
-  border-top-color: var(--app-dark-blue);
-  border-bottom: none;
-  bottom: 101%;
-  left: calc(50% - 6px);
-  transform: translateY(10px);
-  margin-bottom: 4px;
-}
-
-.status-icon[data-tooltip]:hover:after,
-.status-icon[data-tooltip]:hover:before {
-  visibility: visible;
-  opacity: 0.95;
-  transform: translateX(-50%) translateY(0);
-}
-
-.status-icon[data-tooltip]:hover:after {
-  transform: translateY(0);
-}
-
+/* Status Colors */
 .status-yes .status-icon {
   background-color: rgba(15, 118, 110, 0.1);
 }
@@ -739,7 +763,7 @@ main {
   color: var(--app-error);
 }
 
-/* Select Input Styles */
+/* Select Dropdown */
 .header-select {
   width: 100%;
   margin: 0;
@@ -764,7 +788,9 @@ main {
   background-color: var(--app-hover);
 }
 
-/* Toggle Switch Styles */
+/* ==========================================================================
+   Toggle Switch Component
+   ========================================================================== */
 .toggle-container {
   display: flex;
   align-items: center;
@@ -778,6 +804,7 @@ main {
   letter-spacing: 0.3px;
 }
 
+/* Power Switch Styles */
 .power-switch {
   --color-invert: #ffffff;
   --width: 32px;
@@ -789,6 +816,7 @@ main {
   width: var(--width);
   height: var(--height);
 }
+
 .power-switch .button {
   width: 100%;
   height: 100%;
@@ -797,6 +825,7 @@ main {
   align-items: center;
   position: relative;
 }
+
 .power-switch .button:after {
   content: "";
   width: 100%;
@@ -813,6 +842,7 @@ main {
   transform: perspective(1px) translateZ(0);
   backface-visibility: hidden;
 }
+
 .power-switch .power-on,
 .power-switch .power-off {
   height: 100%;
@@ -825,10 +855,12 @@ main {
   stroke-linecap: round;
   stroke-linejoin: round;
 }
+
 .power-switch .power-on .line,
 .power-switch .power-off .line {
   opacity: 0.6;
 }
+
 .power-switch .power-on .circle,
 .power-switch .power-off .circle {
   opacity: 0.6;
@@ -837,18 +869,22 @@ main {
   stroke-dasharray: 220;
   stroke-dashoffset: 40;
 }
+
 .power-switch .power-on {
   filter: drop-shadow(0px 0px 2px rgba(255, 255, 255, 0.8));
 }
+
 .power-switch .power-on .line {
   opacity: 0;
   transition: opacity 0.3s ease 1s;
 }
+
 .power-switch .power-on .circle {
   opacity: 1;
   stroke-dashoffset: 220;
   transition: transform 0s ease, stroke-dashoffset 1s ease 0s;
 }
+
 .power-switch input {
   position: absolute;
   height: 100%;
@@ -857,22 +893,26 @@ main {
   cursor: pointer;
   opacity: 0;
 }
+
 .power-switch input:checked + .button:after {
   opacity: 0.15;
   transform: scale(1.1) perspective(1px) translateZ(0);
   backface-visibility: hidden;
   transition: opacity 0.5s ease, transform 0.5s ease;
 }
+
 .power-switch input:checked + .button .power-on,
 .power-switch input:checked + .button .power-off {
   animation: click-animation 0.3s ease forwards;
   transform: scale(1);
 }
+
 .power-switch input:checked + .button .power-on .line {
   animation: line-animation 0.8s ease-in forwards;
   opacity: 1;
   transition: opacity 0.05s ease-in 0.55s;
 }
+
 .power-switch input:checked + .button .power-on .circle {
   transform: rotate(302deg);
   stroke-dashoffset: 40;
@@ -933,45 +973,365 @@ main {
   }
 }
 
-/* Utility Classes */
+/* ==========================================================================
+   Tooltips
+   ========================================================================== */
+.status-icon[data-tooltip] {
+  position: relative;
+}
+
+.status-icon[data-tooltip]:before,
+.status-icon[data-tooltip]:after {
+  position: absolute;
+  visibility: hidden;
+  opacity: 0;
+  transition: transform 200ms ease, opacity 200ms;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  z-index: 102;
+}
+
+.status-icon[data-tooltip]:before {
+  content: attr(data-tooltip);
+  background: var(--app-dark-blue);
+  color: var(--app-white);
+  font-size: 12px;
+  font-weight: bold;
+  padding: 8px 12px;
+  border-radius: 4px;
+  white-space: nowrap;
+  text-decoration: none;
+  letter-spacing: 0.5px;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  margin-bottom: 10px;
+}
+
+.status-icon[data-tooltip]:after {
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+  content: "";
+  border-top-color: var(--app-dark-blue);
+  border-bottom: none;
+  bottom: 101%;
+  left: calc(50% - 6px);
+  transform: translateY(10px);
+  margin-bottom: 4px;
+}
+
+.status-icon[data-tooltip]:hover:after,
+.status-icon[data-tooltip]:hover:before {
+  visibility: visible;
+  opacity: 0.95;
+  transform: translateX(-50%) translateY(0);
+}
+
+.status-icon[data-tooltip]:hover:after {
+  transform: translateY(0);
+}
+
+/* ==========================================================================
+   Utility Classes
+   ========================================================================== */
 .hidden-row {
   display: none;
 }
 
-/* Media Queries */
-@media (max-width: 700px) {
-  .header h1 {
-    font-size: 1.2rem;
+/* ==========================================================================
+   Media Queries
+   ========================================================================== */
+@media screen and (max-width: 970px) {
+  /* Header adjustments */
+  .header {
+    padding: 6rem 1rem 3rem 1rem;
   }
+
+  .header h1 {
+    font-size: 2.5rem;
+  }
+
+  /* Comparison header adjustments */
 
   .comparison-header {
-    display: none;
+    padding: 0.75rem;
   }
 
-  .comparison-row {
-    flex-direction: column;
-    margin-bottom: 1rem;
-  }
-
-  .feature-cell {
-    width: 100%;
-    background-color: #f8fafc;
-  }
-
-  .status-cell {
-    width: 100%;
-    justify-content: space-between;
-    padding: 0.75rem 1rem;
-  }
-
-  .status-cell::before {
-    content: attr(data-label);
-    font-weight: 600;
-    margin-right: 1rem;
+  .feature-header {
+    font-size: 1.5rem;
   }
 
   .header-select {
-    width: 100%;
-    max-width: 200px;
+    padding: 8px 30px 8px 10px;
+    font-size: 14px;
+  }
+
+  /* Content adjustments */
+  .feature-wrapper {
+    flex: 3;
+  }
+
+  .feature-cell {
+    padding: 1.25rem 1rem;
+    font-size: 14px;
+    height: 56px;
+  }
+
+  .status-cell {
+    padding: 1.25rem 1rem;
+  }
+
+  /* Toggle container adjustments */
+  .toggle-container {
+    gap: 0.5rem;
+  }
+
+  .toggle-container span {
+    font-size: 12px;
+  }
+
+  /* Adjust spacing between columns */
+  .content-wrapper {
+    gap: 15px;
+  }
+
+  /* Adjust vertical line size */
+  .vertical-line {
+    min-width: 2px;
+    margin-right: 8px;
+  }
+
+  /* Status icon adjustments */
+  .status-icon {
+    width: 28px;
+    height: 28px;
+    padding: 5px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  /* Header adjustments */
+  .comparison-header-wrapper {
+    padding: 0 0.5rem;
+  }
+
+  .header {
+    padding: 4rem 0.5rem 2rem 0.5rem;
+  }
+
+  .header h1 {
+    font-size: 2rem;
+  }
+
+  /* Comparison header adjustments */
+  .feature-header {
+    font-size: 1.25rem;
+  }
+
+  /* Content adjustments */
+  .feature-wrapper {
+    flex: 4;
+  }
+
+  .feature-cell {
+    padding: 1rem 0.75rem;
+    font-size: 13px;
+    height: 48px;
+  }
+
+  .status-cell {
+    padding: 1rem 0.75rem;
+  }
+
+  /* Adjust spacing between columns */
+  .content-wrapper {
+    gap: 10px;
+  }
+
+  /* Package column adjustments */
+  .package-column {
+    min-width: 150px;
+  }
+
+  /* Header select adjustments */
+  .header-select {
+    font-size: 13px;
+    padding: 6px 25px 6px 8px;
+  }
+
+  /* Status icon adjustments */
+  .status-icon {
+    width: 24px;
+    height: 24px;
+    padding: 4px;
+  }
+
+  /* Main padding adjustment */
+  main {
+    padding: 0.5rem;
+  }
+}
+
+@media screen and (max-width: 516px) {
+  /* Header adjustments */
+  .header h1 {
+    font-size: 1.75rem;
+  }
+
+  /* Package column adjustments */
+  .package-column {
+    min-width: 120px;
+  }
+
+  /* Content adjustments */
+
+  .content-wrapper {
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px,
+      rgb(209, 213, 219) 0px 0px 0px 1px inset;
+    border-radius: 30px;
+  }
+
+  .feature-wrapper {
+    box-shadow: none;
+  }
+
+  .status-wrapper {
+    box-shadow: none;
+  }
+
+  .feature-cell {
+    padding: 1rem 0.75rem;
+    font-size: 12px;
+    height: 44px;
+  }
+
+  .status-cell {
+    padding: 1rem 0.75rem;
+  }
+
+  /* Toggle container adjustments */
+  .toggle-container span {
+    font-size: 11px;
+  }
+
+  /* Header select adjustments */
+  .header-select {
+    font-size: 12px;
+    padding: 5px 20px 5px 6px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .feature-wrapper {
+    flex: 5;
+  }
+
+  .feature-cell {
+    padding: 1.5rem 0.75rem;
+  }
+
+  .status-cell {
+    padding: 1.5rem 0.75rem;
+  }
+
+  .comparison-header {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
+
+/* ==========================================================================
+   Tooltips - Mobile & Tablet
+   ========================================================================== */
+@media screen and (max-width: 1500px) {
+  .status-icon[data-tooltip]:before {
+    transform-origin: right bottom;
+    left: auto;
+    right: -100px;
+    transform: translateY(10px);
+  }
+
+  .status-icon[data-tooltip]:after {
+    left: auto;
+    right: 4px;
+  }
+
+  .status-icon[data-tooltip]:hover:before {
+    transform: translateY(0);
+  }
+
+  /* Override the default tooltip hover transform */
+  .status-icon[data-tooltip]:hover:after,
+  .status-icon[data-tooltip]:hover:before {
+    transform: translateY(0);
+  }
+}
+
+@media screen and (max-width: 980px) {
+  .status-icon[data-tooltip]:before {
+    right: -50px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .status-icon[data-tooltip]:before {
+    right: -20px;
+    min-width: 180px;
+    white-space: normal;
+  }
+}
+
+@media screen and (max-width: 516px) {
+  .status-icon[data-tooltip]:before {
+    right: -10px;
+  }
+}
+
+/* ==========================================================================
+   Mobile Touch Device Optimizations
+   ========================================================================== */
+@media (hover: none) {
+  .feature-cell {
+    /* Remove hover transition effects */
+    transition: none;
+    transform: none !important;
+  }
+
+  .feature-cell:hover {
+    /* Disable color change and transform on hover */
+    color: var(--app-text) !important;
+    transform: none !important;
+  }
+
+  /* Disable status icon animations */
+  .status-icon {
+    animation: none !important;
+  }
+
+  .status-icon:hover {
+    transform: none !important;
+    animation: none !important;
+  }
+}
+
+/* Additional fallback for older devices */
+@media screen and (max-width: 768px) {
+  .feature-cell {
+    transition: none;
+    transform: none !important;
+  }
+
+  .feature-cell:hover {
+    color: var(--app-text) !important;
+    transform: none !important;
+  }
+
+  .status-icon {
+    animation: none !important;
+  }
+
+  .status-icon:hover {
+    transform: none !important;
+    animation: none !important;
   }
 }

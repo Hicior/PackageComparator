@@ -24,19 +24,13 @@
 /* ==========================================================================
    Base Styles
    ========================================================================== */
-body {
+.package-comparator-wrapper {
   margin: 0;
   padding: 0;
   background: var(--app-background);
   font-family: var(--Inter-font);
   color: var(--app-text);
-}
-
-* {
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-family: var(--Inter-font);
 }
 
 /* ==========================================================================

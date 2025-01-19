@@ -41,7 +41,7 @@ const packagesData = {
   ],
   "Mentzen+ IT Ryczałt": [
     "Nielimitowane konsultacje podatkowe",
-    "Analiza podatkowa raz w roku",
+    "Analiza podatkowa raz w roku kalendarzowym",
     "Wsparcie w procesie IP BOX",
     "Wniosek o wydanie interpretacji indywidualnej w zakresie ulgi IP BOX oraz zastosowanie stawek 12% oraz 8,5% ryczałtu",
     "Wnioski do GUS",
@@ -63,13 +63,14 @@ const packagesData = {
   ],
   "Mentzen+ IT Średni": [
     "Nielimitowane konsultacje podatkowe",
-    "Analiza podatkowa raz w roku",
+    "Analiza podatkowa raz w roku kalendarzowym",
     "Nielimitowane konsultacje prawne",
     "Wsparcie w procesie IP BOX",
     "Wniosek o wydanie interpretacji indywidualnej w zakresie ulgi IP BOX oraz zastosowanie stawek 12% oraz 8,5% ryczałtu",
     "Wsparcie w kontrolach podatkowych",
     "Wsparcie w postępowaniach przed organami podatkowymi oraz sądami administracyjnymi, w tym przed Naczelnym Sądem Administracyjnym",
     "Przygotowywanie bieżącej ewidencji na potrzeby rozliczenia ulgi IP Box",
+    "Uproszczony audyt KPIR",
     "Wnioski do GUS",
     "Zakładanie JDG",
     "Zakładanie spółek przez system S24",
@@ -84,7 +85,7 @@ const packagesData = {
   ],
   "Mentzen+ IT Premium": [
     "Nielimitowane konsultacje podatkowe",
-    "Analiza podatkowa raz w roku",
+    "Analiza podatkowa raz w roku kalendarzowym",
     "Nielimitowane konsultacje prawne",
     "Wsparcie w procesie IP BOX",
     "Wniosek o wydanie interpretacji indywidualnej w zakresie ulgi IP BOX oraz zastosowanie stawek 12% oraz 8,5% ryczałtu",
@@ -177,21 +178,60 @@ const comparisonBody = document.getElementById("comparisonBody");
    Package Select Initialization
    ========================================================================== */
 const packageNames = Object.keys(packagesData);
-packageNames.forEach((name) => {
-  const opt1 = document.createElement("option");
-  opt1.value = name;
-  opt1.innerText = name;
-  packageSelect1.appendChild(opt1);
 
-  const opt2 = document.createElement("option");
-  opt2.value = name;
-  opt2.innerText = name;
-  packageSelect2.appendChild(opt2);
+// Helper function to update dropdown options
+function updateDropdownOptions(sourceSelect, targetSelect, skipValueUpdate = false) {
+    const selectedValue = sourceSelect.value;
+    
+    // Store current selection of target dropdown
+    const currentTargetValue = targetSelect.value;
+    
+    // Clear and rebuild target dropdown options
+    targetSelect.innerHTML = '';
+    
+    packageNames.forEach(name => {
+        // Skip adding the option that's selected in the source dropdown
+        if (name !== selectedValue) {
+            const opt = document.createElement("option");
+            opt.value = name;
+            opt.innerText = name;
+            targetSelect.appendChild(opt);
+        }
+    });
+    
+    if (!skipValueUpdate) {
+        // If the previously selected value is still available, keep it selected
+        if (currentTargetValue !== selectedValue && packageNames.includes(currentTargetValue)) {
+            targetSelect.value = currentTargetValue;
+        } else {
+            // Otherwise, select the first available option
+            targetSelect.value = targetSelect.options[0].value;
+        }
+    }
+}
+
+// Initialize both dropdowns with all options
+packageNames.forEach(name => {
+    // Add to first dropdown
+    const opt1 = document.createElement("option");
+    opt1.value = name;
+    opt1.innerText = name;
+    packageSelect1.appendChild(opt1);
+    
+    // Add to second dropdown
+    const opt2 = document.createElement("option");
+    opt2.value = name;
+    opt2.innerText = name;
+    packageSelect2.appendChild(opt2);
 });
 
-// Set default selected packages
-packageSelect1.value = packageNames[0];
-packageSelect2.value = packageNames[1];
+// Set initial values
+packageSelect1.value = packageNames[0]; // PRIME
+packageSelect2.value = "Mentzen+ IT Podstawowy";
+
+// Update dropdowns based on initial selections
+updateDropdownOptions(packageSelect2, packageSelect1);
+updateDropdownOptions(packageSelect1, packageSelect2);
 
 /* ==========================================================================
    Status Icon Creation
@@ -378,11 +418,19 @@ function renderComparison() {
 /* ==========================================================================
    Event Listeners
    ========================================================================== */
+// Update event listeners
+packageSelect1.addEventListener("change", () => {
+    updateDropdownOptions(packageSelect1, packageSelect2);
+    renderComparison();
+});
+
+packageSelect2.addEventListener("change", () => {
+    updateDropdownOptions(packageSelect2, packageSelect1);
+    renderComparison();
+});
+
 const diffToggle = document.getElementById("diffToggle");
 diffToggle.addEventListener("change", renderComparison);
-
-packageSelect1.addEventListener("change", renderComparison);
-packageSelect2.addEventListener("change", renderComparison);
 
 // Initial render
 renderComparison();
